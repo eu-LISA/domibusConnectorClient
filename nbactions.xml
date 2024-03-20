@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-site run port 8022</actionName>
+            <displayName>site run port 8022</displayName>
+            <goals>
+                <goal>site:run</goal>
+            </goals>
+            <properties>
+                <port>8022</port>
+            </properties>
+        </action>
+    </actions>

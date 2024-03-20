@@ -1,0 +1,23 @@
+== Certificates, Keys and Keystores required
+This guide explains the certificates and keys required for the domibusConnectorClient-Application to communicate with the domibusConnector.
+
+This guide will *NOT* cover how keypairs and stores are created. Please refer to the web documentation on how to create keypairs and Java-Keystores (JKS).
+
+=== Overview
+
+Diagram: domibusConnectorClient-Application required keys
+[#img-domibusConnectorClient-Application required keys]
+[link=images/domibusConnectorClient_keys_stores.png,window=_tab]
+image::images/domibusConnectorClient_keys_stores.png[domibusConnectorClient-Application required keys,300,200]
+
+
+=== Required keypairs
+To connect a domibusConnectorClient as a backend to a domibusConnector 2 keypairs are required:
+* *domibusConnector backend keypair* This keypair must be configured on the backend side of the domibusConnector. Details on how to do this are described in the documentation of the domibusConnector. In the picture above this keypair is described as "Private/Public Key Connector backend". For the domibusConnectorClient only the public key of this keypair is reqired.
+* *domibusConnectorClient keypair* This keypair is completely to be generated and used for the domibusConnectorClient. It may be selfsigned. It is described in the picture above as "Private/Public key connector client". the public key of it must be configured on the backend side of the domibusConnector. Details on how to do this are described in the documentation of the domibusConnector. For the domibusConnectorClient the private key of this keypair is reqired.
+
+=== Required keystore
+To be able to use the described keys, it is necessary to pack them into a keystore. This keystore must be a Java Keystore (JKS). One keystore for both, the public key of the connector's backend and the private key of the domibusConnectorClient is sufficient. Inside the keystore, the keys are named with alias' which are required for configuration.
+
+=== Configuration
+How to configure the keys and keystore for the domibusConnectorClient is described in the link:config_guide.html[configuration guide].

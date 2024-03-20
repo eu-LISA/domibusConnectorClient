@@ -1,0 +1,26 @@
+== The domibusConnectorClient as an e-CODEX building block
+
+The domibusConnectorClient is a possibility for e-CODEX participants to support the connection to the backend of the domibusConnector. The architecture of the e-CODEX building blocks shows where the domibusConnectorClient is placed:
+
+Diagram: e-CODEX_building_blocks-overview
+[#img-e-CODEX_building_blocks-overview]
+[link=images/e-CODEX_building_blocks-overview.png,window=_tab]
+image::images/e-CODEX_building_blocks-overview.png[e-CODEX_building_blocks-overview,300,200]
+
+== Architecture Overview
+
+Here, in short, an overall architectural overview of how the domibusConnectorClient is set up:
+
+Diagram: domibusConnectorClient-overview
+[#img-domibusConnectorClientOverview]
+[link=images/domibusConnectorClient-overview.png,window=_tab]
+image::images/domibusConnectorClient-overview.png[domibusConnectorClientOverview,300,200]
+
+
+== Distribution packages
+
+=== The domibusConnectorClient offers 3 different options
+* *domibusConnectorClient-Libraries* is a distribution package for developers that may use different libraries in their custom backend application to have support in connecting to the domibusConnector, send and receive messages and having timer-jobs available to actively pull message from the domibusConnector or trigger the backend application to send new messages to the domibusConnector. Details on this distribution package can be found at the link:domibusConnectorClientLibraries/index.html[domibusConnectorClient-Libraries documentation site].
+* *domibusConnectorClient-Application* is the client application that runs out of the box. Depending on its configuration it can be used as a standalone application to send and receive messages without having a custom backend application (yet). As a generic client, it is independent of any e-CODEX use case. Details on this distribution package can be found at the link:domibusConnectorClientApplication/index.html[domibusConnectorClient-Application documentation site].
+* *domibusConnectorClient-UI* is a user interface developed to interact with the domibusConnectorClient-Application over a REST service. It is an own application besides the client application itself. 
+

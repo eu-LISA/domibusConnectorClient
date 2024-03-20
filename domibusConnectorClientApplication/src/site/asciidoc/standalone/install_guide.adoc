@@ -1,0 +1,189 @@
+== Installation guilde for the domibusConnectorClientApplication-Standalone
+
+After downloading and extracting the domibusConnectorClientApplication-Standalone.zip, the structure given is explained at the
+link:packagecontent.html[packagecontent] site.
+
+To get the application started, if used as default setup, nothing more than running the "startConnectorClient" script depending on your operating system.
+
+Still, there are many possibilities to customize the domibusConnectorClientApplication-Standalone.
+
+=== Database
+By default, the application creates and uses an H2 database settled at "/database" subfolder.
+If one wants to use a central database, the following properties need to be set properly:
+
+[source,properties]
+----
+spring.datasource.driver-class-name=<name of the JDBC driver provided>
+spring.jpa.database-platform=<name of the hibernate dialect to use>
+
+spring.datasource.url=<JDBC url where the database can be reached>
+spring.datasource.username=
+spring.datasource.password=
+----
+
+Additionally, the proper JDBC driver inside a JAR has to be added to the "/lib" sub folder.
+
+The database, default or custom, will initialize itself. If the structure (tables) are not found in the target database, they will be created using the script:
+
+[source,sql]
+----
+CREATE TABLE IF NOT EXISTS CONNECTOR_CLIENT_MESSAGE (
+	ID INT AUTO_INCREMENT  PRIMARY KEY,
+  EBMS_MESSAGE_ID VARCHAR(255) UNIQUE,
+  BACKEND_MESSAGE_ID VARCHAR(255) UNIQUE,
+  CONVERSATION_ID VARCHAR(255),
+  ORIGINAL_SENDER VARCHAR(255),
+  FINAL_RECIPIENT VARCHAR(255),
+  FROM_PARTY_ID VARCHAR(255),
+  FROM_PARTY_TYPE VARCHAR(255),
+  FROM_PARTY_ROLE VARCHAR(255),
+  TO_PARTY_ID VARCHAR(255),
+  TO_PARTY_TYPE VARCHAR(255),
+  TO_PARTY_ROLE VARCHAR(255),
+  SERVICE VARCHAR(255),
+  ACTION VARCHAR(255),
+  STORAGE_STATUS VARCHAR(255),
+  STORAGE_INFO VARCHAR(255),
+  MESSAGE_STATUS VARCHAR(255),
+  CREATED TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS CONNECTOR_CLIENT_CONFIRMATION (
+	ID INT AUTO_INCREMENT  PRIMARY KEY,
+	MESSAGE_ID INT NOT NULL,
+	CONFIRMATION_TYPE VARCHAR(255) NOT NULL,
+	RECEIVED TIMESTAMP,
+	foreign key (MESSAGE_ID) references CONNECTOR_CLIENT_MESSAGE(ID)
+);
+
+CREATE SEQUENCE IF NOT EXISTS clientMessageSeq;
+
+CREATE SEQUENCE IF NOT EXISTS CLIENT_CONFIRMATION_SEQ start with 100 increment by 1;
+----
+
+If this is not possible as the target DBMS does not support features of the script (like sequences), adapt the script and execute it BEFORE the first startup.
+
+=== Push/push vs push/pull mode
+The domibusConnectorClient-Application can be connected to its corresponding domibusConnector in two ways:
+
+* push/push mode means that the domibusConnectorClient pushed messages to the domibusConnector and the domibusConnector can push messages directly to the domibusConnectorClient.
+* push/pull mode means that the domibusConnectorClient pushed messages to the domibusConnector, but new messages need to be pulled from the domibusConnector.
+
+==== Push/push mode
+To be able to have a push/push communication with the domibusConnector, the domibusConnectorClient must provide a SOAP service implementing the link:../apidocs/eu/domibus/connector/ws/backend/delivery/webservice/DomibusConnectorBackendDeliveryWebService.html[*DomibusConnectorBackendDeliveryWebService*,window="_tab"] interface. If configure properly, the domibusConnectorClient does this automatically.
+
+The following steps need to be done:
+
+Enable push in properties:
+[source,properties]
+----
+connector-client.connector-link.ws.pushEnabled=true
+----
+
+Disable timer job to pull messages from the connector:
+[source,properties]
+----
+connector-client.scheduler.get-messages-from-connector-job.enabled=false
+----
+
+When starting the client, the DomibusConnectorDeliveryWebService will be provided by CXF. The exact address including context that you have to configure on the domibusConnector backend can be seen at:
+[source,properties]
+----
+http:// <url>:<port>/services
+----
+
+Be aware, that you have to configure the domibusConnectorClient also as a push backend at the domibusConnector.
+
+==== Push/pull mode
+If you want the domibusConnectorClient to pull messages from the domibusConnector, please configure the following:
+
+Disable push in properties:
+[source,properties]
+----
+connector-client.connector-link.ws.pushEnabled=false
+----
+
+Enable timer job to pull messages from the connector:
+[source,properties]
+----
+connector-client.scheduler.get-messages-from-connector-job.enabled=false
+connector-client.scheduler.get-messages-from-connector-job.repeatInterval=30s
+----
+
+
+=== Backend application vs standalone usage
+The domibusConnectorClient-Application is designed to work either as a standalone client, or with a backend application.
+
+==== Standalone usage
+This mode is configured by default. It means that there is no other application behind the connector client communicating directly with the connector client. The messages and confirmations are stored in the filesystem storage as configured.
+
+The following properties should be set in that case:
+
+[source,properties]
+----
+connector-client.storage.filesystem.enabled=true
+
+connector-client.controller.auto-confirm-messages-job.enabled=true
+connector-client.controller.auto-confirm-messages-job.repeatInterval=1m
+
+----
+
+In this case the workflow for messages is finished if the message has the MessageStatus CONFIRMED.
+The message is stored in the filesystem and in the database and the last confirmation for this message was also received and stored.
+
+==== Usage with backend application
+If there is a backend application that messages and confirmations should be delivered to and that should submit messages and trigger confirmations at the connector client, the following properties should be set:
+
+[source,properties]
+----
+connector-client.storage.filesystem.enabled=true
+
+connector-client.controller.auto-confirm-messages-job.enabled=false
+connector-client.controller.auto-confirm-messages-job.repeatInterval=1m
+
+----
+
+In that case the messages are stored in the filesystem storage of the connector client and the database, but also may be delivered to a backend application. Also, a backend application can submit messages to the connector client and trigger confirmations.
+
+If the backend application is connected in push/pull mode (the control of getting and submitting something from/to the connector client is on the backend side), it should implement REST service clients that contact the REST API services provided by the connector client
+
+* *DomibusConnectorClientMessageRestAPI*
+** link:../apidocs/eu/domibus/connector/client/rest/DomibusConnectorClientMessageRestAPI.html[*DomibusConnectorClientMessageRestAPI*,window="_tab"] 
+** Path to service: http:// <url>:<port>/messagerestservice
+** to request new messages and confirmations
+* *DomibusConnectorClientSubmissionRestAPI*
+** link:../apidocs/eu/domibus/connector/client/rest/DomibusConnectorClientSubmissionRestAPI.html[*DomibusConnectorClientSubmissionRestAPI*,window="_tab"] 
+** Path to service: http:// <url>:<port>/submissionrestservice
+** to submit messages and trigger confirmations.
+
+The connector client may also be configured to push messages and confirmations after procession to a backend application directly.
+In that case, the backend application needs to provide a REST service. The connector client offers an interface that may be useful for implementing such a REST service. It is the link:../apidocs/eu/domibus/connector/client/rest/DomibusConnectorClientDeliveryRestClientAPI.html[*DomibusConnectorClientDeliveryRestClientAPI*,window="_tab"]. 
+Configuration properties that need to be set properly for that case are:
+
+[source,properties]
+----
+connector-client.controller.delivery-rest-client.enabled=true
+connector-client.controller.delivery-rest-client.url=<URL to the REST service provided by the backend application>
+connector-client.controller.delivery-rest-client.deliverNewMessageMethodUrl=<POST method of the REST service to deliver messages>
+connector-client.controller.delivery-rest-client.deliverNewConfirmationMethodUrl=<POST method of the REST service to deliver confirmations>
+----
+
+=== Content mapping and schema validation
+The domibusConnectorClient offers that the business content XML of a message may be mapped during processing. Also, that the XML structure can be validated against local or international schemas.
+
+To use those mechanisms, the interfaces link:../apidocs/eu/domibus/connector/client/mapping/DomibusConnectorClientContentMapper.html[*DomibusConnectorClientContentMapper*,window="_tab"], link:../apidocs/eu/domibus/connector/client/schema/validation/DCCInternationalSchemaValidator.html[*DCCInternationalSchemaValidator*,window="_tab"] and link:../apidocs/eu/domibus/connector/client/schema/validation/DCCLocalSchemaValidator.html[*DCCLocalSchemaValidator*,window="_tab"] need to be implemented. All implementation classes need to be marked as *@org.springframework.stereotype.Component*. Libraries built with that implementation classes must be put into the "/lib" sub folder of the connector client. Spring recognizes at startup that those interfaces are implemented and can initialize and call the implementations during the procession of a message.
+
+=== User interface (UI)
+There is a standard user interface available for the domibusConnectorClient-Application. 
+Though, an own user interface may be developed. The REST service link:../apidocs/eu/domibus/connector/client/rest/DomibusConnectorClientRestAPI.html[*DomibusConnectorClientRestAPI*,window="_tab"] is designed to interact with a user interface. This service is also used by the standard user interface.
+To use the standard user interface configure the following properties:
+
+[source,properties]
+----
+connector-client-rest-url=http://<url>:<port>/restservice
+spring.codec.max-in-memory-size=20MB
+----
+
+For the connector-client-rest-url the parts url and port must reference the client application self. In most cases this will be the standard value "localhost" and "8080". If the "server.port" of the connectorClient application is set, this port then must be used.
+
+The second property is for spring to know the limit of data transferred within one single request between the UI and the applications rest service.

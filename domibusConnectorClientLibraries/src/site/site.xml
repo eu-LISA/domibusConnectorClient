@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="domibusConnectorClient-Libraries">
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.8</version>
+	</skin>
+	<custom>
+		<fluidoSkin>
+			<topBarEnabled>true</topBarEnabled>
+			<sideBarEnabled>false</sideBarEnabled>
+		</fluidoSkin>
+	</custom>
+
+	<bannerLeft>
+		<name>e-Codex</name>
+		<src>images/logo_ecodex_0.png</src>
+		<width>100px</width>
+		<height>100px</height>
+		<href>https://www.e-codex.eu/</href>
+	</bannerLeft>
+
+	<bannerRight>
+		<src>images/europa-logo.jpg</src>
+		<width>50px</width>
+		<height>50px</height>
+	</bannerRight>
+
+	<body>
+
+		<menu name="Architecture">
+			<item name="Architecture of ${project.name}" href="architecture.html" />
+		</menu>
+		<menu name="Package Content">
+			<item name="Package description of ${project.name}" href="packagecontent.html" />
+		</menu>
+		<menu name="Javadoc">
+			<item name="Aggregated apidocs of ${project.name}" href="apidocs/index.html" />
+		</menu>
+		<menu name="Configuration">
+			<item name="Configuration Properties used in ${project.name}" href="configuration.html" />
+		</menu>
+
+		<footer />
+
+	</body>
+</project>

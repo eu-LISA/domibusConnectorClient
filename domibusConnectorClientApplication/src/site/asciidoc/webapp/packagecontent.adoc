@@ -1,0 +1,26 @@
+== Content of the domibusConnectorClientApplication-Webapp package
+
+After download and extraction of the "domibusConnectorClientApplication-Webapp.zip" file the extracted folder has the following content:
+
+Diagram: domibusConnectorClientApplication-Webapp package content
+[#img-domibusConnectorClientApplicationWebappPackageContent]
+[link=../images/packagecontent_webapp.png,window=_tab]
+image::../images/packagecontent_webapp.png[domibusConnectorClientApplicationWebappPackageContent,300,200]
+
+
+=== documentation folder
+Holds this site documentation.
+
+=== example-config folder
+This folder contains an example on how to configure the domibusConnectorClientApplication-Webapp in an Apache Tomcat. All files and folders contained are meant to be in the *conf* subfolder of the Tomcat:
+
+* *Catalina/localhost/connector-client.xml* - An example context initialization file that is named like the WAR file in webapps. This context configuration enables the connector-client webapp to load the proper configuration.
+
+* *connector-client/connector-client.properties*	- properties file containing the most essential properties for the domibusConnectorClient-Application as examples. For further details, please refer to the link:../config_guide.html[configuration guide].
+* *connector-client/log4j2.xml*					- XML file defining the logging. It is preconfigured so that LOG files will be put in the "logs" subfolder.
+
+The structure and files are prepared so that they can be used in an Apache Tomcat 8.
+
+=== webapps
+Holding the *connector-client.war* file itself.
+

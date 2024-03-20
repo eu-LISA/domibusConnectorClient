@@ -1,0 +1,35 @@
+== Content of the domibusConnectorClientApplication-Standalone package
+
+After download and extraction of the "domibusConnectorClientApplication-Standalone.zip" file the extracted folder has the following content:
+
+Diagram: domibusConnectorClientApplication-Standalone package content
+[#img-domibusConnectorClientApplicationStandalonePackageContent]
+[link=../images/packagecontent_standalone.png,window=_tab]
+image::../images/packagecontent_standalone.png[domibusConnectorClientApplicationStandalonePackageContent,300,200]
+
+=== startConnectorClient scripts
+
+* *startConnectorClient.bat*	-This file starts the domibusConnectorClient-Application in a MS-Windows environment. It checks, if the *JAVA_HOME* environment variable is set, sets the *classpath* environment variable to */bin* and */lib* and starts the application.
+* *startConnectorClient.sh*		-This file starts the domibusConnectorClient-Application in a UNIX based environment (linux and other derivates). It demands as a precondition that JAVA is properly configured, the JAVA executable is on the *PATH* environment variable, sets the *classpath* environment variable to */bin* and */lib* and starts the application.
+
+
+=== config folder
+This folder contains the following files:
+
+* *connector-client.properties*	- properties file containing the most essential properties for the domibusConnectorClient-Application as examples. For further details, please refer to the link:../config_guide.html[configuration guide].
+* *log4j2.xml*					- XML file defining the logging. It is preconfigured so that LOG files will be put in the "logs" subfolder.
+
+=== database folder
+Using the standard configuration deliverd with this package, this subfolder will contain the embedded database for the domibusConnectorClient-Application. Though empty, the database files will be created at first startup. 
+
+=== documentation folder
+Holds this site documentation.
+
+=== lib folder
+This folder is part of the *classpath* configured in the startup scripts described above. If your domibusConnectorClient-Application requires other libraries than those delivered, they can be placed here.
+
+=== logs folder
+Empty folder prepared for log files that will be generated. Only relevant, when using the standard configuration.
+
+=== messages folder
+Also empty in the beginning. Messages that will be received by the domibusConnectorClient, or generated using the domibusConnectorClient will be stored here. In the standard configuration this is the storage used by the domibusConnectorClientFSStorage.

@@ -1,0 +1,92 @@
+== Architecture Overview
+
+Diagram: domibusConnectorClientApplication overview
+[#img-domibusConnectorClientApplication]
+[link=images/domibusConnectorClientApplication.png,window=_tab]
+image::images/domibusConnectorClientApplication.png[domibusConnectorClientApplication,300,200]
+
+
+The domibusConnectorClient-Application consists of the following modules:
+
+* domibusConnectorClientAppAPI
+* domibusConnectorClientController
+* domibusConnectorClientFSStorage
+* domibusConnectorClientRestAPI
+* domibusConnectorClientStarter
+* domibusConnectorClientUI
+* domibusConnectorClientWAR
+
+Additionally, the domibusConnectorClient-Application uses the libraries that are contained in the domibusConnectorClient-Libraries package.
+
+
+=== domibusConnectorClientAppAPI
+
+==== Description
+Over the whole domibusConnectorClient-Application, a common API defines interfaces that are used by the modules to communicate with each other. Those interfaces can be implemented/overridden by developers in case some modules are replaced by customized ones. An example is that some implementer does not want to use the domibusConnectorClientFSStorage to store messages in a file system, but has some other storage solution that should be used. All interfaces are well described in the link:apidocs/index.html[API docs,window=_tab] of this package.
+This overview picture above as well as all architecture images only contain the interfaces that are used within the environment that is pictured.
+
+=== domibusConnectorClientController
+
+Diagram: domibusConnectorClientController
+[#img-domibusConnectorClientController]
+[link=images/domibusConnectorClientController.png,window=_tab]
+image::images/domibusConnectorClientController.png[domibusConnectorClientController,300,200]
+
+==== Description
+The controller is the module that knows all the other modules. The main features of the controller are:
+
+* It loads the embedded database used by the domibusConnectorClient and holds the model of this database. This database is stored in a file that can be configured.
+* It controls the usage of the domibusConnectorClient libraries used to communicate with the domibusConnector.
+* The controller communicates with the storage module.
+* The default implementation of the REST services provided by the domibusConnectorClientRestAPI is also part of the controller.
+* There are 2 additional timer jobs within the controller:
+** AutoConfirmMessagesJob queries the database if messages that have been received have not been confirmed yet. For the resulting messages the job triggers the domibusConnector to produce and send such a confirmation.
+** UpdateStorageStatusJob validates if messages that are stored in the database of the domibusConnectorClient still exist in the storage by consulting the storage module and updates the storage status of messages within the database.
+* Triggered by configuration, the controller at startup provides a service that restores the domibusConnectorClient database if the database file is lost or damaged with information provided by the storage module.
+
+=== domibusConnectorClientFSStorage
+
+Diagram: domibusConnectorClientFSStorage
+[#img-domibusConnectorClientFSStorage]
+[link=images/domibusConnectorClientFSStorage.png,window=_tab]
+image::images/domibusConnectorClientFSStorage.png[domibusConnectorClientFSStorage,300,200]
+
+==== Description
+This standard storage module provided by the domibusConnectorClient-Application stores and reads messages and their files from a filesystem. To be able to do so, the module has many default injected properties that can be overridden in the property configuration. 
+
+=== domibusConnectorClientRestAPI
+
+Diagram: domibusConnectorClientRestAPI
+[#img-domibusConnectorClientRestAPI]
+[link=images/domibusConnectorClientRestAPI.png,window=_tab]
+image::images/domibusConnectorClientRestAPI.png[domibusConnectorClientRestAPI,300,200]
+
+==== Description
+* *DomibusConnectorClientRestAPI* 
+** Allows other applications to use functionalities of the client. It also provides the interface the domibusConnectorClient-UI uses. That way, implementers can develop their own user interface for the domibusConnectorClient. A prominent example is the Central Testing Platform (CTP) of e-CODEX.
+* *DomibusConnectorClientMessageRestAPI* 
+** Interface provided as a REST service to let backend applications pull messages and confirmations from the domibusConnectorClient-Application.
+* *DomibusConnectorClientSubmissionRestAPI* 
+** Interface provided as a REST service to let backend applications push messages or trigger confirmations to the domibusConnectorClient-Application.
+* *DomibusConnectorDeliveryRestClientAPI* 
+** Interface implemented as a REST client. If a backend application provides a REST service that implements the methods of this interface, the domibusConnectorClient-Application can push new messages and confirmations towards this REST service. Requires additional configuration properties described in the link:config_guide.html[configuration guide].
+
+=== domibusConnectorClientStarter
+
+Diagram: domibusConnectorClientStarter
+[#img-domibusConnectorClientStarter]
+[link=images/domibusConnectorClientStarter.png,window=_tab]
+image::images/domibusConnectorClientStarter.png[domibusConnectorClientStarter,300,200]
+
+==== Description
+The domibusConnectorClientStarter is just a module to start the spring boot application context and set the properties file.
+
+=== domibusConnectorClientUI
+
+==== Description
+This module contains all necessary classes and configuration to build the user interface of the domibusConnectorClientApplication
+
+=== domibusConnectorClientWAR
+
+==== Description
+In this module there is only a starter class that enables the domibusConnectorClientApplication to run and be loaded properly in a servlet container. It also builds the WAR file that is distributed in the domibusConnectorClientApplication-Webapp package.

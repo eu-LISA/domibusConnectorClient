@@ -1,0 +1,22 @@
+== Content of the domibusConnectorClient-Libraries package
+
+After download and extraction of the "domibusConnectorClient-Libraries.zip" file the extracted folder has the following content:
+
+Diagram: domibusConnectorClient-Libraries package content
+[#img-domibusConnectorClientLibrariesPackageContent]
+[link=images/domibusConnectorClient-Libraries-PackageContent.png,window=_tab]
+image::images/domibusConnectorClient-Libraries-PackageContent.png[domibusConnectorClientLibrariesPackageContent,300,200]
+
+=== site documentation
+Since this site is shown, the site documentation is already openend. It is the web-based documentation of the documentation for the libraries contained.
+
+=== general description of the libraries subfolder contents
+Each libraries subfolder contains the following files:
+
+* *_.jar_*         - it is the actual library that needs to be used when integrated and implemented into an application
+* *_-sources.jar_* - the jar archive that contains the sources for this library. This is for developers that understand the java code that the library is written in. Could also be used for debug purpose.
+* *_-javadoc.jar_* - contains the API documentation (javadoc) of the library. This apidoc is merged to the apidocs of this site documentation.
+* *_pom.xml_*       - this is the project definition file of the library. Details on the pom.xml and its contents can be found in the documentation of *Apache Maven*.
+
+=== libraries subfolder
+The description of the libraries, their purpose and usage can be found in the link:architecture.html[architecture documentation].

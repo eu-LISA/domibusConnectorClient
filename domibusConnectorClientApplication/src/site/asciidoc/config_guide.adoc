@@ -1,0 +1,161 @@
+== Configuration guilde for the domibusConnectorClient
+
+This page describes what properties must/can be set for the domibusConnectorClient-Application.
+For some, there are default values set within the classpath that may be overridden in the configuration.
+
+=== Configuration from the domibusConnectorClient-Libraries
+The properties listed are necessary for the underlying libraries:
+
+[source,properties]
+----
+
+############# domibusConnectorClientWSLink ##############
+
+#Address where the domibusConnectorClient reaches the domibusConnector
+connector-client.connector-link.ws.connectorAddress=http://<url>:<port>/<contextpath>
+
+#Name of the alias of the key that the domibusConnectorClient shall encrypt messages to the connector with
+connector-client.connector-link.ws.cxf.encryptAlias=
+
+#boolean property to indicate wether the domibusConnector can push messages to the client.
+connector-client.connector-link.ws.pushEnabled=false
+
+#properties to configure the keystore. Must contain the private key the client uses to sign/decrypt messages
+connector-client.connector-link.ws.cxf.keyStore.path=file:<full path to the keystore>
+connector-client.connector-link.ws.cxf.keyStore.password=
+connector-client.connector-link.ws.cxf.privateKey.alias=
+connector-client.connector-link.ws.cxf.privateKey.password=
+
+#properties to configure the truststore. Must contain the certificate of the domibusConnector with which the client encrypts messages with
+connector-client.connector-link.ws.cxf.trustStore.path=file:<full path to the truststore>
+connector-client.connector-link.ws.cxf.trustStore.password=
+
+
+############# domibusConnectorClientLibrary ##############
+
+#If the interfaces for schema validation are implemented, this property defines at which state of result the message should be declined.
+#Possible values are FATAL_ERROR, ERROR, WARNING
+connector-client.library.schemaValidationMaxSeverityLevel=
+
+
+############# domibusConnectorClientScheduler ##############
+
+#properties to configure the time-triggered job to get messages from the domibusConnector. Not necessary if client is configured as pushEnabled.
+connector-client.scheduler.get-messages-from-connector-job.enabled=false
+connector-client.scheduler.get-messages-from-connector-job.repeatInterval=30s
+
+#properties to configure the time-triggered job to check the client backend for new messages to submit.
+#Not necessary if backend provides a REST service for delivery. 
+connector-client.scheduler.submit-messages-to-connector-job.enabled=false
+connector-client.scheduler.submit-messages-to-connector-job.repeatInterval=30s
+
+
+----
+
+=== Configuration properties for the domibusConnectorClientFSStorage
+
+Default properties for the filesystem storage:
+
+[source,properties]
+----
+connector-client.storage.filesystem.enabled=true
+
+connector-client.storage.filesystem.messages.path=messages
+connector-client.storage.filesystem.messages.createIfNonExistent=true
+
+connector-client.storage.filesystem.message-properties.fileName=message.properties
+connector-client.storage.filesystem.message-properties.service=service
+connector-client.storage.filesystem.message-properties.action=action
+connector-client.storage.filesystem.message-properties.toPartyRole=to.party.role
+connector-client.storage.filesystem.message-properties.toPartyId=to.party.id
+connector-client.storage.filesystem.message-properties.fromPartyRole=from.party.role
+connector-client.storage.filesystem.message-properties.fromPartyId=from.party.id
+connector-client.storage.filesystem.message-properties.originalSender=original.sender
+connector-client.storage.filesystem.message-properties.finalRecipient=final.recipient
+connector-client.storage.filesystem.message-properties.backendMessageId=backend.message.id
+connector-client.storage.filesystem.message-properties.ebmsMessageId=ebms.message.id
+connector-client.storage.filesystem.message-properties.conversationId=conversation.id
+connector-client.storage.filesystem.message-properties.contentPdfFileName=content.pdf.file.name
+connector-client.storage.filesystem.message-properties.contentXmlFileName=content.xml.file.name
+connector-client.storage.filesystem.message-properties.detachedSignatureFileName=detached.signature.file.name
+connector-client.storage.filesystem.message-properties.messageReceivedDatetime=message.received.datetime
+connector-client.storage.filesystem.message-properties.messageSentDatetime=message.sent.datetime
+
+connector-client.storage.filesystem.properties.messageReadyPostfix=_message
+connector-client.storage.filesystem.properties.pdfFileExtension=.pdf
+connector-client.storage.filesystem.properties.xmlFileExtension=.xml
+connector-client.storage.filesystem.properties.pkcs7FileExtension=.p7b
+connector-client.storage.filesystem.properties.defaultPdfFileName=content.pdf
+connector-client.storage.filesystem.properties.defaultXmlFileName=content.xml
+connector-client.storage.filesystem.properties.defaultDetachedSignatureFileName=detachedSignature
+connector-client.storage.filesystem.properties.attachmentIdPrefix=attachment_
+
+----
+
+
+=== Configuration properties for the domibusConnectorClientController
+
+Default properties for the controller:
+
+[source,properties]
+----
+#Properties describing the business actions for submitting confirmations. Depending on the business use case.
+connector-client.controller.confirmationDefaultAction.submissionAcceptanceRejection=SubmissionAcceptanceRejection
+connector-client.controller.confirmationDefaultAction.relayREMMDAcceptanceRejection=RelayREMMDAcceptanceRejection
+connector-client.controller.confirmationDefaultAction.deliveryNonDeliveryToRecipient=DeliveryNonDeliveryToRecipient
+connector-client.controller.confirmationDefaultAction.retrievalNonRetrievalToRecipient=RetrievalNonRetrievalToRecipient
+
+#Properties to activate and configure the time-triggered job to check the storage references stored in the database.
+connector-client.controller.update-storage-status-job.enabled=true
+connector-client.controller.update-storage-status-job.repeatInterval=1m
+
+#If the domibusConnectorClient-Application is without a backend, it needs to trigger confirmations time-triggered.
+connector-client.controller.auto-confirm-messages-job.enabled=false
+connector-client.controller.auto-confirm-messages-job.repeatInterval=1m
+
+#If a backend provides a REST service that allows pushing messages and confirmaitons, it needs to be 
+# configured here:
+connector-client.controller.delivery-rest-client.enabled=false
+connector-client.controller.delivery-rest-client.url=
+connector-client.controller.delivery-rest-client.deliverNewMessageMethodUrl=/deliverNewMessageFromConnectorClientToBackend
+connector-client.controller.delivery-rest-client.deliverNewConfirmationMethodUrl=/deliverNewConfirmationFromConnectorClientToBackend
+----
+
+=== Configuration properties for the domibusConnectorClientStarter
+
+The properties for the starter are mostly spring properties. Default properties for the starter:
+
+[source,properties]
+----
+#
+# spring cloud disabling
+spring.cloud.config.enabled=false
+
+# H2
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+spring.h2.console.settings.trace=false
+# Datasource
+
+spring.datasource.driverClassName=org.h2.Driver
+
+spring.datasource.initialize=false
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto = update
+
+org.springframework.boot.logging.LoggingSystem=Log4J2
+----
+
+=== Configuration properties for the domibusConnectorClientUI
+
+The properties for the UI are only 2 to set:
+
+[source,properties]
+----
+connector-client-rest-url=http://<url>:<port>/restservice
+spring.codec.max-in-memory-size=20MB
+----
+
+For the connector-client-rest-url the parts url and port must reference the client application self. In most cases this will be the standard value "localhost" and "8080". If the "server.port" of the connectorClient application is set, this port then must be used.
+
+The second property is for spring to know the limit of data transferred within one single request between the UI and the applications rest service.

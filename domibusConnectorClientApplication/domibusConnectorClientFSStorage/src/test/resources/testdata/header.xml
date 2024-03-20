@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StandardBusinessDocumentHeader>
+    <HeaderVersion>1.0</HeaderVersion>
+    <transport>
+        <Sender>
+            <Identifier>PQ</Identifier>
+            <contactInformation>
+                <Contact>Pellet Jean-Marc</Contact>
+                <EmailAddress>jmp@hcch.nl</EmailAddress>
+                <FaxNumber>61-2-6141 3248</FaxNumber>
+                <TelephoneNumber>123- -1234</TelephoneNumber>
+                <ContactTypeIdentifier>Central Authority of PQ</ContactTypeIdentifier>
+            </contactInformation>
+        </Sender>
+        <Receiver>
+            <Identifier>PS</Identifier>
+            <contactInformation>
+                <Contact>Ms.Kelly Williams</Contact>
+                <EmailAddress>intercountry.adoption@ag.gov.aa</EmailAddress>
+                <FaxNumber>61-2-6141 3248</FaxNumber>
+                <TelephoneNumber>61-2-6141 3217</TelephoneNumber>
+                <ContactTypeIdentifier>Central Authority of AA</ContactTypeIdentifier>
+            </contactInformation>
+        </Receiver>
+        <msgId>1000717PQ</msgId>
+        <caseId>PQ-PS(AA)-2021-100_0161-PQ/MSG-01</caseId>
+        <creditorName>fips:v1:0i2JmAasBaUfbxWHiVKkbg==</creditorName>
+        <debitorName>fips:v1:0i2JmAasBaUfbxWHiVKkbg==</debitorName>
+        <msgCreationDateAndTime>2022-02-23 07:30:01</msgCreationDateAndTime>
+        <msgHashCode>uJxxrhDni8jcoK4XKu6667yAjpRwQO67+W+a6eUa2euiFMy1k3r1UoD+O4+9y0pYEHd3TcTzPbEHhn7xMe5GLQLWkJrsVoEPQbZ7ICI0D8Jy7Qe/tCipcUh/ASAF/MeBlSZUAY2dft8w+hXIA5McykD1VROG76r5L9w6X1sRuOSvkaWhPGWY0qcJXbVRlfXkmfMapavb7F7vCPhG4Rx843UORqvTmRCvm/SZNgmPp0Oi3h+zRGYoCoj+sawTWFOcsyxomLk4jVsVu4BOZPqe1+ilRwNr0P3iIzMoekAfys0zdJLWjTOXdTHSKyJ2lStlFtontTCqobvDOlDC0I3Q/Q==</msgHashCode>
+        <cdTypeForm></cdTypeForm>
+    </transport>
+    <message>
+        <Documents>
+            <DocumentIdentification>
+                <UniformResourceIdentifier>Note</UniformResourceIdentifier>
+                <Type>NTOF</Type>
+                <MimeTypeQualifierCode>application/note</MimeTypeQualifierCode>
+                <fileSize>4</fileSize>
+                <fileCreationDateAndTime>2022-02-23 07:30:01</fileCreationDateAndTime>
+                <fileHashCode>n6R/lJCG487IyTrbPOA1lpR0/eRYKVaqCOeDEwc1IDAZsSVzdJVc7iqBKtmDdpfc3x0eR+8483VP6t8gCyo9QyEDAE+Wmuh5OYFrjoBT7cUAmSzbAo1EWOo7MVLJL49oncg41b3Ka9uGOAYrh2I3WV5v7zoJ67iW7hvzNTN9Prn9SyaHhW3mfTkjxpj6zPi/TsPs7nUHroYEFPxko3vXb0mnRAExuAfr/2L7SjYwg62LrTO4GtuwHIm4jMScKr7teJEwfNPLPJ+gihe6NUjVNfm9A9Fjp5NA06ILOXOK+kbQI2uRS6e6LGfc7UTXiPWUR94gPVtlUjM/lDO8y/be5g==</fileHashCode>
+            </DocumentIdentification>
+            <DocumentIdentification>
+                <UniformResourceIdentifier>2022-01-19-Convention_Request_for_Specific_Measures_Article_71-SM01.pdf</UniformResourceIdentifier>
+                <Type>D</Type>
+                <MimeTypeQualifierCode>application/pdf</MimeTypeQualifierCode>
+                <fileSize>85905</fileSize>
+                <fileCreationDateAndTime>2022-02-23 07:30:02</fileCreationDateAndTime>
+                <fileHashCode>iml2jGdhym2KI6L0vf74KpbILri2hspax6KyrnAIl9r25S1tbdpuvmJGrU3V1wMB2IJlVdknaDYUOFrgOFDAf/VQ+ReF+UAF1PdnKw/t+oC5+w/kJ7Nch4iVLrLS4KqO5CkhSV5uFvG8vKBxuM4Ah1+En3ZUWPPLsgH9/2TUw7MVamsw3MvvACJQQVqlcADKyL0gEr7J2ypqLooFaXB1U6xxasdCvHK1A/FkI5G6s6Q8Xaax4olYmj3SGQ9l43Lk5ORbSKzansdG80HFC8MLMd+3rmAJ31uLTYxoZShWa4vn109eKhD8qEpC2O6VEigZqToymCXhlKIFu4yf0ui3ow==</fileHashCode>
+            </DocumentIdentification>
+        </Documents>
+    </message>
+</StandardBusinessDocumentHeader>

@@ -1,0 +1,18 @@
+== Changelog for domibusConnector-client-4.4.x
+
+=== 4.4.5
+
+==== Fixes
+
+* adds support for setting the service type of a message.
+* adds tests for iSupport file handling.
+* adds some configuration for containerized deployments.
+
+
+=== 4.4.6
+
+* Internal changes on build
+
+==== Known Issues
+
+* None
