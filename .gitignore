@@ -133,6 +133,8 @@ domibusConnectorClient/domibusConnectorClientLibraries/domibusConnectorClientSch
 domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientUI/*.log
 
 .node_modules/
+**node/
+**node_modules/
 domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientStarter/node_modules/*
 domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientWAR/node_modules/*
 */package-lock.json
