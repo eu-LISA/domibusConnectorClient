@@ -118,7 +118,7 @@
         </ecodex-common-jakarta-dependencies.version>
         <ecodex.utils.version>0.0.21-RELEASE</ecodex.utils.version>
         <!--other-->
-        <connector-server.version>4.4.0</connector-server.version>
+        <connector-server.version>5.0.0</connector-server.version>
         <hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
         <h2.database.version>1.4.200</h2.database.version>
         <javax.validation-api.version>2.0.1.Final</javax.validation-api.version>
