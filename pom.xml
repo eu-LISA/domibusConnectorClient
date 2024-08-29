@@ -124,14 +124,13 @@
         <hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
         <h2.database.version>1.4.200</h2.database.version>
         <javax.validation-api.version>2.0.1.Final</javax.validation-api.version>
+        <lombok.version>1.18.34</lombok.version>
         <objenesis.version>2.6</objenesis.version>
         <okio.version>1.17.2</okio.version>
         <spring.boot.version>2.6.6</spring.boot.version>
         <swagger.version>1.5.12</swagger.version>
         <vaadin.version>14.1.17</vaadin.version>
         <org.apache.log4j2.version>2.17.0</org.apache.log4j2.version>
-
-
         <org.apache.log4j2.version>2.17.0</org.apache.log4j2.version>
     </properties>
     <dependencyManagement>
@@ -202,6 +201,11 @@
                 <scope>import</scope>
             </dependency>
             <!--other -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-annotations</artifactId>
