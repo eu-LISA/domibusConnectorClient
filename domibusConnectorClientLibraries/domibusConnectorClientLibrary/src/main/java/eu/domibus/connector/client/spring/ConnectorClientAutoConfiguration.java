@@ -1,17 +1,27 @@
+/*
+ * Copyright 2024 European Union Agency for the Operational Management of Large-Scale IT Systems
+ * in the Area of Freedom, Security and Justice (eu-LISA)
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy at: https://joinup.ec.europa.eu/software/page/eupl
+ */
 
 package eu.domibus.connector.client.spring;
 
+import eu.domibus.connector.client.schema.validation.SeverityLevel;
 import javax.validation.Valid;
-
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 
-import eu.domibus.connector.client.schema.validation.SeverityLevel;
-
 /**
+ * This class is a configuration class for the ConnectorClient library. It is used to configure
+ * properties and beans related to the library.
  *
  * @author {@literal Stephan Spindler <stephan.spindler@extern.brz.gv.at> }
  */
@@ -20,56 +30,12 @@ import eu.domibus.connector.client.schema.validation.SeverityLevel;
 @PropertySource("classpath:/connector-client-library-default.properties")
 @Validated
 @Valid
+@Data
 public class ConnectorClientAutoConfiguration {
-
-	public SeverityLevel getSchemaValidationMaxSeverityLevel() {
-		return schemaValidationMaxSeverityLevel;
-	}
-
-	public void setSchemaValidationMaxSeverityLevel(SeverityLevel schemaValidationMaxSeverityLevel) {
-		this.schemaValidationMaxSeverityLevel = schemaValidationMaxSeverityLevel;
-	}
-
-	public static final String PREFIX = "connector-client.library";
-	
-	@Nullable
+    public static final String PREFIX = "connector-client.library";
+    @Nullable
     private SeverityLevel schemaValidationMaxSeverityLevel;
-
-//    /**
-//     * if not available create a default ContentMapper Bean.
-//     * This implementation does a identity mapping so the business
-//     * xml is not changed
-//     * @return - a 1:1 mapping implementation
-//     */
-//    @Bean
-//    @ConditionalOnMissingBean(DomibusConnectorClientContentMapper.class)
-//    public DomibusConnectorClientContentMapper contentMapper() {
-//    	return new DomibusConnectorClientContentMapperDefaultImpl();
-//    }
-
-	private boolean acknowledgeMessagesRequired=false;
-	
-	@Nullable
-	private Integer requestMessagesMaxCount;
-
-
-
-	public boolean isAcknowledgeMessagesRequired() {
-		return acknowledgeMessagesRequired;
-	}
-
-	public void setAcknowledgeMessagesRequired(boolean acknowledgeMessagesRequired) {
-		this.acknowledgeMessagesRequired = acknowledgeMessagesRequired;
-	}
-
-	public Integer getRequestMessagesMaxCount() {
-		return requestMessagesMaxCount;
-	}
-
-	public void setRequestMessagesMaxCount(Integer requestMessagesMaxCount) {
-		this.requestMessagesMaxCount = requestMessagesMaxCount;
-	}
-
-
-	
+    private boolean acknowledgeMessagesRequired = false;
+    @Nullable
+    private Integer requestMessagesMaxCount;
 }
