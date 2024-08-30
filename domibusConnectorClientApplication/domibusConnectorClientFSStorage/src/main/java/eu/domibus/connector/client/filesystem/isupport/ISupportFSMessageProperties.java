@@ -1,113 +1,53 @@
+/*
+ * Copyright 2024 European Union Agency for the Operational Management of Large-Scale IT Systems
+ * in the Area of Freedom, Security and Justice (eu-LISA)
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy at: https://joinup.ec.europa.eu/software/page/eupl
+ */
+
 package eu.domibus.connector.client.filesystem.isupport;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import eu.domibus.connector.client.filesystem.configuration.DomibusConnectorClientFSStorageConfiguration;
-
-@ConfigurationProperties(prefix = ISupportFSMessageProperties.PREFIX)
-@Validated
+/**
+ * The ISupportFSMessageProperties class represents the configuration properties for the iSupport
+ * file system storage within the Domibus system. It is used in the ISupportFSConfiguration class to
+ * configure the iSupport file system storage.
+ */
+@Data
 @Valid
+@Validated
+@SuppressWarnings("checkstyle:MemberName")
+@ConfigurationProperties(prefix = ISupportFSMessageProperties.PREFIX)
 public class ISupportFSMessageProperties {
-	
-	public static final String PREFIX = "connector-client.storage.filesystem.message-properties";
-
-	@NotEmpty
-	private String fileName;
-	@NotEmpty
-	private String service;
-	@NotEmpty
-	private String serviceType;
-	@NotEmpty
-	private String action;
-	@NotEmpty
-	private String fromPartyRole;
-	@NotEmpty
-	private String fromPartyIdType;
-	@NotEmpty
-	private String toPartyRole;
-	@NotEmpty
-	private String toPartyIdType;
-	@NotEmpty
-	private String iSupportIncomingDir;
-	@NotEmpty
-	private String iSupportOutgoingDir;
-	@NotEmpty
-	private String processedFileName;
-	
-	
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public String getService() {
-		return service;
-	}
-	public void setService(String service) {
-		this.service = service;
-	}
-	public String getServiceType() {
-		return serviceType;
-	}
-	public void setServiceType(String serviceType) {
-		this.serviceType = serviceType;
-	}
-	public String getAction() {
-		return action;
-	}
-	public void setAction(String action) {
-		this.action = action;
-	}
-	public String getFromPartyRole() {
-		return fromPartyRole;
-	}
-	public void setFromPartyRole(String fromPartyRole) {
-		this.fromPartyRole = fromPartyRole;
-	}
-	public String getToPartyRole() {
-		return toPartyRole;
-	}
-	public void setToPartyRole(String toPartyRole) {
-		this.toPartyRole = toPartyRole;
-	}
-	public String getFromPartyIdType() {
-		return fromPartyIdType;
-	}
-	public void setFromPartyIdType(String fromPartyIdType) {
-		this.fromPartyIdType = fromPartyIdType;
-	}
-	public String getToPartyIdType() {
-		return toPartyIdType;
-	}
-	public void setToPartyIdType(String toPartyIdType) {
-		this.toPartyIdType = toPartyIdType;
-	}
-	public String getiSupportIncomingDir() {
-		return iSupportIncomingDir;
-	}
-	public void setiSupportIncomingDir(String iSupportIncomingDir) {
-		this.iSupportIncomingDir = iSupportIncomingDir;
-	}
-	public String getiSupportOutgoingDir() {
-		return iSupportOutgoingDir;
-	}
-	public void setiSupportOutgoingDir(String iSupportOutgoingDir) {
-		this.iSupportOutgoingDir = iSupportOutgoingDir;
-	}
-	public String getProcessedFileName() {
-		return processedFileName;
-	}
-	public void setProcessedFileName(String processedFileName) {
-		this.processedFileName = processedFileName;
-	}
-
+    public static final String PREFIX = "connector-client.storage.filesystem.message-properties";
+    @NotEmpty
+    private String fileName;
+    @NotEmpty
+    private String service;
+    @NotEmpty
+    private String serviceType;
+    @NotEmpty
+    private String action;
+    @NotEmpty
+    private String fromPartyRole;
+    @NotEmpty
+    private String fromPartyIdType;
+    @NotEmpty
+    private String toPartyRole;
+    @NotEmpty
+    private String toPartyIdType;
+    @NotEmpty
+    private String iSupportIncomingDir;
+    @NotEmpty
+    private String iSupportOutgoingDir;
+    @NotEmpty
+    private String processedFileName;
 }
