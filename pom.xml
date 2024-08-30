@@ -19,12 +19,13 @@
         </license>
     </licenses>
     <scm>
-        <developerConnection>scm:git:https://secure.e-codex.eu/gitblit/r/Me-CODEX/domibusConnectorClient.git
-        </developerConnection>
+        <url>https://github.com/e-CODEX/connector-client</url>
+        <connection>scm:git:git@github.com:e-CODEX/connector-client.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:e-CODEX/connector-client.git</developerConnection>
     </scm>
     <ciManagement>
         <system>Github Actions</system>
-        <url>https://github.com/eu-LISA/domibusConnector/actions</url>
+        <url>https://github.com/e-CODEX/connector-client/actions</url>
     </ciManagement>
     <modules>
         <module>domibusConnectorClientLibraries</module>
