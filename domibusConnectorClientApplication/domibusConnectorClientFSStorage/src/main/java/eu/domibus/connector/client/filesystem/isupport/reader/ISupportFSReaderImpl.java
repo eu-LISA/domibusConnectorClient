@@ -1,22 +1,14 @@
+/*
+ * Copyright 2024 European Union Agency for the Operational Management of Large-Scale IT Systems
+ * in the Area of Freedom, Security and Justice (eu-LISA)
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy at: https://joinup.ec.europa.eu/software/page/eupl
+ */
+
 package eu.domibus.connector.client.filesystem.isupport.reader;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.activation.MimetypesFileTypeMap;
-import javax.validation.Valid;
-import javax.xml.bind.JAXBException;
-
-import org.apache.commons.lang.ArrayUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
 
 import eu.domibus.connector.client.filesystem.AbstractDomibusConnectorClientFileSystemReaderImpl;
 import eu.domibus.connector.client.filesystem.DomibusConnectorClientFileSystemException;
@@ -37,233 +29,251 @@ import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.domibus.connector.domain.transition.DomibusConnectorPartyType;
 import eu.domibus.connector.domain.transition.DomibusConnectorServiceType;
 import eu.domibus.connector.domain.transition.tools.ConversionTools;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.activation.MimetypesFileTypeMap;
+import javax.validation.Valid;
+import javax.xml.bind.JAXBException;
+import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 
+/**
+ * {@code ISupportFSReaderImpl} is a class that implements the
+ * {@code DomibusConnectorClientFileSystemReader} interface. It provides methods for reading unsent
+ * messages and retrieving file lists from a message folder.
+ */
 @Component
 @Validated
 @Valid
 @Profile("iSupport")
-public class ISupportFSReaderImpl extends AbstractDomibusConnectorClientFileSystemReaderImpl implements DomibusConnectorClientFileSystemReader {
+public class ISupportFSReaderImpl extends AbstractDomibusConnectorClientFileSystemReaderImpl
+    implements DomibusConnectorClientFileSystemReader {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ISupportFSReaderImpl.class);
+    public static final String FOUND_CONTENT_XML_FILE_WITH_NAME =
+        "Found content xml file with name {}";
+    @Autowired
+    private ISupportFSMessageProperties messageProperties;
+    @Autowired
+    private SBDHJaxbConverter sbdhConverter;
+    @Autowired
+    private DomibusConnectorClientFSConfigurationProperties properties;
 
-	org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ISupportFSReaderImpl.class);
+    @Override
+    public List<File> readUnsentMessages(File messagesDir) {
+        var outgoingMessagesDir = new File(messagesDir, messageProperties.getISupportOutgoingDir());
 
-	@Autowired
-	private ISupportFSMessageProperties messageProperties;
-	
-	@Autowired
-	private SBDHJaxbConverter sbdhConverter;
-	
-	@Autowired
-	private DomibusConnectorClientFSConfigurationProperties properties;
-	
-	@Override
-	public List<File> readUnsentMessages(File messagesDir){
-		File outgoingMessagesDir = new File(messagesDir, messageProperties.getiSupportOutgoingDir());
-		
-		if(!outgoingMessagesDir.exists()) {
-			outgoingMessagesDir.mkdir();
-			if(!outgoingMessagesDir.exists()) {
-				LOGGER.error("Problem with directories.");
-	            return null;
-			}
-			
-		}
-		
-//		LOGGER.debug("#readUnsentMessages: Searching for folders with ending {}", );
-		List<File> messagesUnsent = new ArrayList<File>();
+        if (!outgoingMessagesDir.exists()) {
+            outgoingMessagesDir.mkdir();
+            if (!outgoingMessagesDir.exists()) {
+                LOGGER.error("Problem with directories.");
+                return Collections.emptyList();
+            }
+        }
 
-		if (outgoingMessagesDir.listFiles().length > 0) {
-			for (File sub : outgoingMessagesDir.listFiles()) {
-				if (sub.isDirectory()){
-					File processedFile = new File(sub, messageProperties.getProcessedFileName());
-					if(!processedFile.exists())
-						messagesUnsent.add(sub);
-				}
-			}
-		}
+        List<File> messagesUnsent = new ArrayList<>();
 
-		return messagesUnsent;
-	}
+        if (outgoingMessagesDir.listFiles().length > 0) {
+            for (File sub : outgoingMessagesDir.listFiles()) {
+                if (sub.isDirectory()) {
+                    var processedFile = new File(sub, messageProperties.getProcessedFileName());
+                    if (!processedFile.exists()) {
+                        messagesUnsent.add(sub);
+                    }
+                }
+            }
+        }
 
-	@Override
-	public Map<String, DomibusConnectorClientStorageFileType> getFileListFromMessageFolder(File messageFolder) {
-		Map<String, DomibusConnectorClientStorageFileType> files = new HashMap<>();
-		if (messageFolder.canRead() && messageFolder.isDirectory() && messageFolder.listFiles().length > 0) {
+        return messagesUnsent;
+    }
 
-			for (File sub : messageFolder.listFiles()) {
+    @Override
+    public Map<String, DomibusConnectorClientStorageFileType> getFileListFromMessageFolder(
+        File messageFolder) {
+        Map<String, DomibusConnectorClientStorageFileType> files = new HashMap<>();
+        if (messageFolder.canRead() && messageFolder.isDirectory()
+            && messageFolder.listFiles().length > 0) {
 
-				if (sub.getName().equals(messageProperties.getFileName())) {
-					LOGGER.debug("Found content xml file with name {}", sub.getName());
-					files.put(sub.getName(), DomibusConnectorClientStorageFileType.BUSINESS_CONTENT);
-					continue;
-				} else if (isConfirmation(sub.getName())) {
-					LOGGER.debug("Found confirmation file {}", sub.getName());
-					files.put(sub.getName(), DomibusConnectorClientStorageFileType.CONFIRMATION);
-					continue;
-				} else {
-					LOGGER.debug("Found attachment file {}", sub.getName());
-					files.put(sub.getName(), DomibusConnectorClientStorageFileType.BUSINESS_ATTACHMENT);
-				}
+            for (File sub : messageFolder.listFiles()) {
+                if (sub.getName().equals(messageProperties.getFileName())) {
+                    LOGGER.debug(FOUND_CONTENT_XML_FILE_WITH_NAME, sub.getName());
+                    files.put(
+                        sub.getName(), DomibusConnectorClientStorageFileType.BUSINESS_CONTENT);
+                } else if (isConfirmation(sub.getName())) {
+                    LOGGER.debug("Found confirmation file {}", sub.getName());
+                    files.put(sub.getName(), DomibusConnectorClientStorageFileType.CONFIRMATION);
+                } else {
+                    LOGGER.debug("Found attachment file {}", sub.getName());
+                    files.put(
+                        sub.getName(), DomibusConnectorClientStorageFileType.BUSINESS_ATTACHMENT);
+                }
+            }
+        }
+        return files;
+    }
 
-			}
+    @Override
+    protected DomibusConnectorMessageType processMessageFolderFiles(File workMessageFolder)
+        throws DomibusConnectorClientFileSystemException {
+        var message = new DomibusConnectorMessageType();
 
-		}
-		return files;
-	}
+        StandardBusinessDocumentHeader sbdh;
+        try {
+            sbdh = sbdhConverter.getSBDH(workMessageFolder, this.messageProperties.getFileName());
+        } catch (JAXBException | IOException e1) {
+            throw new RuntimeException();
+        }
 
-	@Override
-	protected DomibusConnectorMessageType processMessageFolderFiles(File workMessageFolder)
-			throws DomibusConnectorClientFileSystemException {
-		DomibusConnectorMessageType message = new DomibusConnectorMessageType();
+        var msgDetails = convertSBDHToMessageDetails(sbdh, workMessageFolder.getName());
+        message.setMessageDetails(msgDetails);
 
-		StandardBusinessDocumentHeader sbdh = null;
-		try {
-			sbdh = sbdhConverter.getSBDH(workMessageFolder, this.messageProperties.getFileName());
-		} catch (JAXBException | IOException e1) {
-			throw new RuntimeException();
-		}
-		
-		DomibusConnectorMessageDetailsType msgDetails = convertSBDHToMessageDetails(sbdh, workMessageFolder.getName());
-		message.setMessageDetails(msgDetails);
+        int attachmentCount = 1;
 
-		int attachmentCount = 1;
+        var messageContent = new DomibusConnectorMessageContentType();
+        var document = new DomibusConnectorMessageDocumentType();
 
-		DomibusConnectorMessageContentType messageContent = new DomibusConnectorMessageContentType();
-		DomibusConnectorMessageDocumentType document = new DomibusConnectorMessageDocumentType();
+        for (var sub : workMessageFolder.listFiles()) {
 
-		for (File sub : workMessageFolder.listFiles()) {
-			
-				if (isFile(sub.getName(),this.messageProperties.getFileName())) {
-					LOGGER.debug("Found content xml file with name {}", sub.getName());
-					try {
-						if(LOGGER.isDebugEnabled()) {
-							byte[] xmlBytes = fileToByteArray(sub);
-							LOGGER.debug("Business content XML after read from file: {}", new String(xmlBytes));
-						}
-						messageContent.setXmlContent(ConversionTools.convertFileToStreamSource(sub));
-					} catch (IOException e) {
-						throw new DomibusConnectorClientFileSystemException(
-								"Exception creating Source object out of file " + sub.getName());
-					}
-					LOGGER.debug("Set {} as document name", workMessageFolder.getName());
-					document.setDocumentName(workMessageFolder.getName());
-					document.setDocument(ConversionTools.convertFileToDataHandler(sub, "text/xml"));
-					continue;
-				} else if (isConfirmation(sub.getName())) {
-					DomibusConnectorMessageConfirmationType confirmation = new DomibusConnectorMessageConfirmationType();
-					confirmation.setConfirmation(ConversionTools.convertFileToStreamSource(sub));
-					if(sub.getName().indexOf(".xml")>0) {
-						String name = sub.getName().substring(0, sub.getName().indexOf(".xml"));
-						DomibusConnectorConfirmationType valueOf = DomibusConnectorConfirmationType.valueOf(name);
-						if(valueOf!=null) {
-							confirmation.setConfirmationType(valueOf);
-						}
-					}
-					message.getMessageConfirmations().add(confirmation);
-				} else if (!isFile(sub.getName(), this.messageProperties.getFileName())){
-					LOGGER.debug("Processing attachment File {}", sub.getName());
+            if (isFile(sub.getName(), this.messageProperties.getFileName())) {
+                LOGGER.debug(FOUND_CONTENT_XML_FILE_WITH_NAME, sub.getName());
+                try {
+                    if (LOGGER.isDebugEnabled()) {
+                        byte[] xmlBytes = fileToByteArray(sub);
+                        LOGGER.debug(
+                            "Business content XML after read from file: {}", new String(xmlBytes));
+                    }
+                    messageContent.setXmlContent(ConversionTools.convertFileToStreamSource(sub));
+                } catch (IOException e) {
+                    throw new DomibusConnectorClientFileSystemException(
+                        "Exception creating Source object out of file " + sub.getName());
+                }
+                LOGGER.debug("Set {} as document name", workMessageFolder.getName());
+                document.setDocumentName(workMessageFolder.getName());
+                document.setDocument(ConversionTools.convertFileToDataHandler(sub, "text/xml"));
+            } else if (isConfirmation(sub.getName())) {
+                var confirmation =
+                    new DomibusConnectorMessageConfirmationType();
+                confirmation.setConfirmation(ConversionTools.convertFileToStreamSource(sub));
+                if (sub.getName().indexOf(".xml") > 0) {
+                    var name = sub.getName().substring(0, sub.getName().indexOf(".xml"));
+                    var valueOf = DomibusConnectorConfirmationType.valueOf(name);
+                    if (valueOf != null) {
+                        confirmation.setConfirmationType(valueOf);
+                    }
+                }
+                message.getMessageConfirmations().add(confirmation);
+            } else if (!isFile(sub.getName(), this.messageProperties.getFileName())) {
+                LOGGER.debug("Processing attachment File {}", sub.getName());
 
-					byte[] attachmentData = null;
-					try {
-						attachmentData = fileToByteArray(sub);
-					} catch (IOException e) {
-						throw new DomibusConnectorClientFileSystemException(
-								"Exception loading attachment into byte array from file " + sub.getName());
-					}
-					String attachmentId = properties.getAttachmentIdPrefix() + attachmentCount;
+                byte[] attachmentData;
+                try {
+                    attachmentData = fileToByteArray(sub);
+                } catch (IOException e) {
+                    throw new DomibusConnectorClientFileSystemException(
+                        "Exception loading attachment into byte array from file " + sub.getName());
+                }
+                String attachmentId = properties.getAttachmentIdPrefix() + attachmentCount;
 
-					if(!ArrayUtils.isEmpty(attachmentData)){
-						DomibusConnectorMessageAttachmentType attachment = new DomibusConnectorMessageAttachmentType();
+                if (!ArrayUtils.isEmpty(attachmentData)) {
+                    var attachment = new DomibusConnectorMessageAttachmentType();
 
-						attachment.setAttachment(ConversionTools.convertFileToDataHandler(sub, "application/octet-stream"));
-						attachment.setIdentifier(attachmentId);
-						attachment.setName(sub.getName());
-						attachmentCount++;
-						attachment.setMimeType(new MimetypesFileTypeMap().getContentType(sub.getName()));
+                    attachment.setAttachment(
+                        ConversionTools.convertFileToDataHandler(sub, "application/octet-stream")
+                    );
+                    attachment.setIdentifier(attachmentId);
+                    attachment.setName(sub.getName());
+                    attachmentCount++;
+                    attachment.setMimeType(
+                        new MimetypesFileTypeMap().getContentType(sub.getName()));
 
-						LOGGER.debug("Add attachment {}", attachment.toString());
-						message.getMessageAttachments().add(attachment);
-					}
-				}
-			
-		}
+                    LOGGER.debug("Add attachment {}", attachment);
+                    message.getMessageAttachments().add(attachment);
+                }
+            }
+        }
 
-		if (document.getDocument() != null) {
-			messageContent.setDocument(document);
-		}
+        if (document.getDocument() != null) {
+            messageContent.setDocument(document);
+        }
 
-		if(messageContent.getXmlContent()!=null)
-			message.setMessageContent(messageContent);
+        if (messageContent.getXmlContent() != null) {
+            message.setMessageContent(messageContent);
+        }
 
-		File messageProcessedFile = new File(workMessageFolder,messageProperties.getProcessedFileName());
-		try {
-			messageProcessedFile.createNewFile();
-		} catch (IOException e) {
-			throw new DomibusConnectorClientFileSystemException("File to mark message as processed could not be created for message "+workMessageFolder.getPath());
-		}
-		
-		
+        var messageProcessedFile =
+            new File(workMessageFolder, messageProperties.getProcessedFileName());
+        try {
+            messageProcessedFile.createNewFile();
+        } catch (IOException e) {
+            throw new DomibusConnectorClientFileSystemException(
+                "File to mark message as processed could not be created for message "
+                    + workMessageFolder.getPath());
+        }
 
-		return message;
-	}
-	
+        return message;
+    }
 
-	
-	private DomibusConnectorMessageDetailsType convertSBDHToMessageDetails(StandardBusinessDocumentHeader sbdh, String messageFolderName) {
+    private DomibusConnectorMessageDetailsType convertSBDHToMessageDetails(
+        StandardBusinessDocumentHeader sbdh, String messageFolderName) {
+        var messageDetails = new DomibusConnectorMessageDetailsType();
 
-		DomibusConnectorMessageDetailsType messageDetails = new DomibusConnectorMessageDetailsType();
+        messageDetails.setFinalRecipient(
+            sbdh.getTransport().getReceiver().getContactInformation().getContact()
+        );
+        messageDetails.setOriginalSender(
+            sbdh.getTransport().getSender().getContactInformation().getContact()
+        );
 
-//		messageDetails.setEbmsMessageId(properties.getMessageProperties().getProperty(messageProperties.getEbmsMessageId()));
+        messageDetails.setBackendMessageId(messageFolderName);
 
-		messageDetails.setFinalRecipient(sbdh.getTransport().getReceiver().getContactInformation().getContact());
-		messageDetails.setOriginalSender(sbdh.getTransport().getSender().getContactInformation().getContact());
-		
-		messageDetails.setBackendMessageId(messageFolderName);
+        String fromPartyId = sbdh.getTransport().getSender().getIdentifier();
+        String fromPartyIdType = messageProperties.getFromPartyIdType();
+        String fromPartyRole = messageProperties.getFromPartyRole();
 
+        var fromParty = new DomibusConnectorPartyType();
+        fromParty.setPartyId(fromPartyId);
+        fromParty.setPartyIdType(fromPartyIdType);
+        fromParty.setRole(fromPartyRole);
+        messageDetails.setFromParty(fromParty);
 
-		
-		String fromPartyId = sbdh.getTransport().getSender().getIdentifier();
-		String fromPartyIdType = messageProperties.getFromPartyIdType();
-		String fromPartyRole = messageProperties.getFromPartyRole();
+        String toPartyId = sbdh.getTransport().getReceiver().getIdentifier();
+        String toPartyIdType = messageProperties.getToPartyIdType();
+        String toPartyRole = messageProperties.getToPartyRole();
 
+        var toParty = new DomibusConnectorPartyType();
+        toParty.setPartyId(toPartyId);
+        toParty.setPartyIdType(toPartyIdType);
+        toParty.setRole(toPartyRole);
+        messageDetails.setToParty(toParty);
 
-		DomibusConnectorPartyType fromParty = new DomibusConnectorPartyType();
-		fromParty.setPartyId(fromPartyId);
-		fromParty.setPartyIdType(fromPartyIdType);
-		fromParty.setRole(fromPartyRole);
-		messageDetails.setFromParty(fromParty);
+        String action = messageProperties.getAction();
+        var domibusConnectorAction = new DomibusConnectorActionType();
+        domibusConnectorAction.setAction(action);
+        messageDetails.setAction(domibusConnectorAction);
 
+        String service = messageProperties.getService();
+        String serviceType = messageProperties.getServiceType();
+        var domibusConnectorService = new DomibusConnectorServiceType();
+        domibusConnectorService.setService(service);
+        domibusConnectorService.setServiceType(serviceType);
 
+        messageDetails.setService(domibusConnectorService);
 
-		String toPartyId = sbdh.getTransport().getReceiver().getIdentifier();
-		String toPartyIdType = messageProperties.getToPartyIdType();
-		String toPartyRole = messageProperties.getToPartyRole();
-		
-		
-		DomibusConnectorPartyType toParty = new DomibusConnectorPartyType();
-		toParty.setPartyId(toPartyId);
-		toParty.setPartyIdType(toPartyIdType);
-		toParty.setRole(toPartyRole);
-		messageDetails.setToParty(toParty);
+        String conversationId = sbdh.getTransport().getCaseId();
+        if (StringUtils.hasText(conversationId)) {
+            messageDetails.setConversationId(conversationId);
+        }
 
-		String action = messageProperties.getAction();
-		DomibusConnectorActionType domibusConnectorAction = new DomibusConnectorActionType();
-		domibusConnectorAction.setAction(action);
-		messageDetails.setAction(domibusConnectorAction);
-
-		String service = messageProperties.getService();
-		String serviceType = messageProperties.getServiceType();
-		DomibusConnectorServiceType domibusConnectorService = new DomibusConnectorServiceType();
-		domibusConnectorService.setService(service);
-		domibusConnectorService.setServiceType(serviceType);
-		
-		messageDetails.setService(domibusConnectorService);
-
-		String conversationId = sbdh.getTransport().getCaseId();
-		if(StringUtils.hasText(conversationId)){
-			messageDetails.setConversationId(conversationId);
-		}
-
-		return messageDetails;
-	}
-
+        return messageDetails;
+    }
 }
