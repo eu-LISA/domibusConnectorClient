@@ -1,64 +1,49 @@
+/*
+ * Copyright 2024 European Union Agency for the Operational Management of Large-Scale IT Systems
+ * in the Area of Freedom, Security and Justice (eu-LISA)
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy at: https://joinup.ec.europa.eu/software/page/eupl
+ */
+
 package eu.domibus.connector.client.rest.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * The {@code DomibusConnectorClientMessageFile} class represents a file associated with a message
+ * that is used by the Domibus connector client.
+ *
+ * @see DomibusConnectorClientMessageFileType
+ * @see DomibusConnectorClientMessageFileList
+ */
+@Data
+@NoArgsConstructor
 public class DomibusConnectorClientMessageFile {
+    private String fileName;
+    private DomibusConnectorClientMessageFileType fileType;
+    private byte[] fileContent;
+    private String storageLocation;
 
-	private String fileName;
-	
-	private DomibusConnectorClientMessageFileType fileType;
-	
-	private byte[] fileContent;
-	
-	private String storageLocation;
-	
-	public DomibusConnectorClientMessageFile() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public DomibusConnectorClientMessageFile(String name, DomibusConnectorClientMessageFileType type) {
-		this.fileName = name;
-		this.setFileType(type);
-	}
-	
-	public DomibusConnectorClientMessageFile(String name, DomibusConnectorClientMessageFileType type, byte[] content) {
-		this.fileName = name;
-		this.setFileType(type);
-		this.setFileContent(content);
-	}
+    public DomibusConnectorClientMessageFile(
+        String name, DomibusConnectorClientMessageFileType type) {
+        this.fileName = name;
+        this.setFileType(type);
+    }
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-
-	public DomibusConnectorClientMessageFileType getFileType() {
-		return fileType;
-	}
-
-	public void setFileType(DomibusConnectorClientMessageFileType fileType) {
-		this.fileType = fileType;
-	}
-
-	public byte[] getFileContent() {
-		return fileContent;
-	}
-
-	public void setFileContent(byte[] fileContent) {
-		this.fileContent = fileContent;
-	}
-
-	public String getStorageLocation() {
-		return storageLocation;
-	}
-
-	public void setStorageLocation(String storageLocation) {
-		this.storageLocation = storageLocation;
-	}
-
-	
-
+    /**
+     * Constructor.
+     *
+     * @see DomibusConnectorClientMessageFileType
+     * @see DomibusConnectorClientMessageFileList
+     */
+    public DomibusConnectorClientMessageFile(
+        String name, DomibusConnectorClientMessageFileType type, byte[] content) {
+        this.fileName = name;
+        this.setFileType(type);
+        this.setFileContent(content);
+    }
 }
