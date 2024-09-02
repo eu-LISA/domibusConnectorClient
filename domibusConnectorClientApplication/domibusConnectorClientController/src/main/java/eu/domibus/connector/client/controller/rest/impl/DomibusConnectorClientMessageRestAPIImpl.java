@@ -1,78 +1,102 @@
+/*
+ * Copyright 2024 European Union Agency for the Operational Management of Large-Scale IT Systems
+ * in the Area of Freedom, Security and Justice (eu-LISA)
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy at: https://joinup.ec.europa.eu/software/page/eupl
+ */
+
 package eu.domibus.connector.client.controller.rest.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import eu.domibus.connector.client.controller.persistence.model.PDomibusConnectorClientMessage;
 import eu.domibus.connector.client.controller.persistence.model.PDomibusConnectorClientMessageStatus;
 import eu.domibus.connector.client.controller.persistence.service.IDomibusConnectorClientPersistenceService;
 import eu.domibus.connector.client.controller.rest.util.DomibusConnectorClientRestUtil;
 import eu.domibus.connector.client.rest.DomibusConnectorClientMessageRestAPI;
-import eu.domibus.connector.client.rest.model.DomibusConnectorClientMessage;
 import eu.domibus.connector.client.rest.model.DomibusConnectorClientMessageList;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class implements the {@link DomibusConnectorClientMessageRestAPI} interface and provides
+ * RESTful endpoints to request messages and confirmations from the Domibus Connector Client.
+ */
 @RestController
 @RequestMapping(DomibusConnectorClientMessageRestAPI.MESSAGERESTSERVICE_PATH)
-public class DomibusConnectorClientMessageRestAPIImpl implements DomibusConnectorClientMessageRestAPI {
+public class DomibusConnectorClientMessageRestAPIImpl
+    implements DomibusConnectorClientMessageRestAPI {
+    private static final Logger LOGGER =
+        LoggerFactory.getLogger(DomibusConnectorClientMessageRestAPIImpl.class);
+    @Autowired
+    private IDomibusConnectorClientPersistenceService persistenceService;
+    @Autowired
+    private DomibusConnectorClientRestUtil util;
 
-	org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(DomibusConnectorClientMessageRestAPIImpl.class);
+    @Override
+    public DomibusConnectorClientMessageList requestNewMessagesFromConnectorClient() {
+        LOGGER.debug("#requestNewMessagesFromConnectorClient called");
 
-	@Autowired
-	private IDomibusConnectorClientPersistenceService persistenceService;
+        List<PDomibusConnectorClientMessage> receivedMessages =
+            persistenceService.getMessageDao().findReceived();
 
-	@Autowired
-	private DomibusConnectorClientRestUtil util;
+        if (receivedMessages != null && !receivedMessages.isEmpty()) {
+            DomibusConnectorClientMessageList clientMessages =
+                util.mapMessagesFromModel(receivedMessages, true);
 
-	@Override
-	public DomibusConnectorClientMessageList requestNewMessagesFromConnectorClient() {
+            receivedMessages.forEach(message -> {
 
-		LOGGER.debug("#requestNewMessagesFromConnectorClient called");
+                message.setMessageStatus(PDomibusConnectorClientMessageStatus.DELIVERED_BACKEND);
+                persistenceService.mergeClientMessage(message);
+            });
 
-		List<PDomibusConnectorClientMessage> receivedMessages = persistenceService.getMessageDao().findReceived();
+            LOGGER.debug(
+                "#requestNewMessagesFromConnectorClient returns {} messages.",
+                clientMessages.getMessages().size()
+            );
 
-		if(receivedMessages!=null && receivedMessages.size()>0) {
-			DomibusConnectorClientMessageList clientMessages = util.mapMessagesFromModel(receivedMessages, true);
+            return clientMessages;
+        } else {
+            LOGGER.debug("#requestNewMessagesFromConnectorClient: no new messages to return.");
+        }
+        return null;
+    }
 
-			receivedMessages.forEach(message -> {
+    @Override
+    public DomibusConnectorClientMessageList
+    requestRejectedOrConfirmedMessagesFromConnectorClient() {
+        LOGGER.debug("#requestRejectedOrConfirmedMessagesFromConnectorClient called");
 
-				message.setMessageStatus(PDomibusConnectorClientMessageStatus.DELIVERED_BACKEND);
-				persistenceService.mergeClientMessage(message);
-			});
+        List<PDomibusConnectorClientMessage> rejectedOrConfirmedMessages =
+            persistenceService.getMessageDao().findRejectedConfirmed();
 
-			LOGGER.debug("#requestNewMessagesFromConnectorClient returns {} messages.",clientMessages.getMessages().size());
+        if (rejectedOrConfirmedMessages != null && !rejectedOrConfirmedMessages.isEmpty()) {
+            DomibusConnectorClientMessageList clientMessages =
+                util.mapMessagesFromModel(rejectedOrConfirmedMessages, true);
 
-			return clientMessages;
-		}else {
-			LOGGER.debug("#requestNewMessagesFromConnectorClient: no new messages to return.");
-		}
-		return null;
-	}
+            rejectedOrConfirmedMessages.forEach(message -> {
 
-	@Override
-	public DomibusConnectorClientMessageList requestRejectedOrConfirmedMessagesFromConnectorClient() {
+                message.setMessageStatus(
+                    PDomibusConnectorClientMessageStatus.CONFIRMATION_DELIVERED_BACKEND);
+                persistenceService.mergeClientMessage(message);
+            });
 
-		LOGGER.debug("#requestRejectedOrConfirmedMessagesFromConnectorClient called");
-
-		List<PDomibusConnectorClientMessage> rejectedOrConfirmedMessages = persistenceService.getMessageDao().findRejectedConfirmed();
-
-		if(rejectedOrConfirmedMessages!=null && rejectedOrConfirmedMessages.size()>0) {
-			DomibusConnectorClientMessageList clientMessages = util.mapMessagesFromModel(rejectedOrConfirmedMessages, true);
-
-			rejectedOrConfirmedMessages.forEach(message -> {
-
-				message.setMessageStatus(PDomibusConnectorClientMessageStatus.CONFIRMATION_DELIVERED_BACKEND);
-				persistenceService.mergeClientMessage(message);
-			});
-
-			LOGGER.debug("#requestRejectedOrConfirmedMessagesFromConnectorClient returns {} messages.",clientMessages.getMessages().size());
-			return clientMessages;
-		}else {
-			LOGGER.debug("#requestRejectedOrConfirmedMessagesFromConnectorClient: no new rejected or confirmed messages to return.");
-		}
-		return null;
-	}
-
+            LOGGER.debug(
+                "#requestRejectedOrConfirmedMessagesFromConnectorClient returns {} messages.",
+                clientMessages.getMessages().size()
+            );
+            return clientMessages;
+        } else {
+            LOGGER.debug(
+                "#requestRejectedOrConfirmedMessagesFromConnectorClient: no new rejected or "
+                    + "confirmed messages to return."
+            );
+        }
+        return null;
+    }
 }

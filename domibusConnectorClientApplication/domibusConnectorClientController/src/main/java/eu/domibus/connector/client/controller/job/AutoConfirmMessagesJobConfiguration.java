@@ -1,10 +1,20 @@
+/*
+ * Copyright 2024 European Union Agency for the Operational Management of Large-Scale IT Systems
+ * in the Area of Freedom, Security and Justice (eu-LISA)
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy at: https://joinup.ec.europa.eu/software/page/eupl
+ */
+
 package eu.domibus.connector.client.controller.job;
 
+import eu.domibus.connector.client.scheduler.configuration.DomibusConnectorClientSchedulerAutoConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,43 +24,52 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 
-import eu.domibus.connector.client.scheduler.configuration.DomibusConnectorClientSchedulerAutoConfiguration;
-
+/**
+ * Configuration class for the AutoConfirmMessagesJob. This class is responsible for configuring the
+ * job execution and triggering the auto confirmation of messages.
+ */
 @EnableConfigurationProperties
-@ConditionalOnProperty(prefix = AutoConfirmMessagesJobConfigurationProperties.PREFIX, value = "enabled", havingValue = "true")
+@ConditionalOnProperty(
+    prefix = AutoConfirmMessagesJobConfigurationProperties.PREFIX, value = "enabled",
+    havingValue = "true"
+)
 @Configuration("autoConfirmMessagesJobConfiguration")
 public class AutoConfirmMessagesJobConfiguration implements Job {
-	
-	private static final Logger LOGGER = LogManager.getLogger(AutoConfirmMessagesJobConfiguration.class);
+    private static final Logger LOGGER =
+        LogManager.getLogger(AutoConfirmMessagesJobConfiguration.class);
+    @Autowired
+    private AutoConfirmMessagesJobService autoConfirmMessagesService;
+    @Autowired
+    AutoConfirmMessagesJobConfigurationProperties properties;
 
-	@Autowired
-	private AutoConfirmMessagesJobService autoConfirmMessagesService;
+    @Override
+    public void execute(JobExecutionContext context) {
+        LOGGER.debug("Running AutoConfirmMessagesJob");
+        autoConfirmMessagesService.autoConfirmMessages();
+    }
 
-	@Autowired
-	AutoConfirmMessagesJobConfigurationProperties properties;
+    @Bean(name = "autoConfirmMessagesJob")
+    public JobDetailFactoryBean autoConfirmMessagesJob() {
+        return DomibusConnectorClientSchedulerAutoConfiguration.createJobDetail(this.getClass());
+    }
 
-	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
-		LOGGER.debug("Running AutoConfirmMessagesJob");
-//        try {
-		autoConfirmMessagesService.autoConfirmMessages();
-//        } catch (DomibusConnectorClientException e) {
-//            throw new JobExecutionException(e);
-//        }
-	}
-
-	@Bean(name = "autoConfirmMessagesJob")
-	public JobDetailFactoryBean autoConfirmMessagesJob() {
-		return DomibusConnectorClientSchedulerAutoConfiguration.createJobDetail(this.getClass());
-	}
-
-	@Bean(name = "autoConfirmMessagesTrigger")
-	public SimpleTriggerFactoryBean autoConfirmMessagesTrigger(@Qualifier("autoConfirmMessagesJob") JobDetailFactoryBean jdfb ) {
-		if (!properties.isEnabled())
-			return null;
-		return DomibusConnectorClientSchedulerAutoConfiguration.createTrigger(jdfb.getObject(),
-				properties.getRepeatInterval().getMilliseconds(),
-				properties.getRepeatInterval().getMilliseconds()/2);
-	}
-
+    /**
+     * Creates a SimpleTriggerFactoryBean object to configure the trigger for the
+     * autoConfirmMessagesJob.
+     *
+     * @param jobDetailFactoryBean the JobDetailFactoryBean for the autoConfirmMessagesJob
+     * @return the SimpleTriggerFactoryBean for the trigger
+     */
+    @Bean(name = "autoConfirmMessagesTrigger")
+    public SimpleTriggerFactoryBean autoConfirmMessagesTrigger(
+        @Qualifier("autoConfirmMessagesJob") JobDetailFactoryBean jobDetailFactoryBean) {
+        if (!properties.isEnabled()) {
+            return null;
+        }
+        return DomibusConnectorClientSchedulerAutoConfiguration.createTrigger(
+            jobDetailFactoryBean.getObject(),
+            properties.getRepeatInterval().getMilliseconds(),
+            properties.getRepeatInterval().getMilliseconds() / 2
+        );
+    }
 }
