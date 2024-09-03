@@ -55,8 +55,4 @@ public enum PDomibusConnectorClientMessageStatus {
     PDomibusConnectorClientMessageStatus(String description) {
         this.statusDescription = description;
     }
-
-    public String getStatusDescription() {
-        return statusDescription;
-    }
 }
