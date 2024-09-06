@@ -9,4 +9,4 @@ jobs:
     with:
       java-version: 21
       sbom-path: 'target/bom.xml'
-      artifact-path: 'domibusConnectorClientApplication/target/domibusConnectorClientApplication.zip'
+      artifact-path: 'application/target/client-application.zip'

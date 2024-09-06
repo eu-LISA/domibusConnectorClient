@@ -30,7 +30,7 @@
               <option value="install" />
               <option value="oc:build" />
               <option value="-pl" />
-              <option value=":domibusConnectorClientWAR" />
+              <option value=":app-war" />
               <option value="-am" />
               <option value="-DskipTests=true" />
               <option value="-Dmaven.javadoc.skip=true" />

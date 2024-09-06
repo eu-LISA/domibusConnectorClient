@@ -108,35 +108,35 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,maven
 
-domibusConnectorClientWsLink/src/main/resources/wsdl/eu.domibus.connector.domain.transition/DomibusConnectorTransitionModel.xsd
-domibusConnectorClientWsLink/src/main/resources/wsdl/
-domibusConnectorClientWsLink/nbproject/
+client-libs-ws-link/src/main/resources/wsdl/eu.ecodex.connector.domain.transition/DomibusConnectorTransitionModel.xsd
+client-libs-ws-link/src/main/resources/wsdl/
+client-libs-ws-link/nbproject/
 domibusConnectorNationalBackend35Client/nbproject/
 domibusConnectorClientRunnable/nbproject/
 domibusConnectorClient35Library/nbproject/
-domibusConnectorClientApi/src/main/java/eu/domibus/connector/domain/transition/
-domibusConnectorClientApi/src/main/resources/eu.domibus.connector.domain.transition/
-domibusConnectorClientApi/src/main/java/META-INF/sun-jaxb.episode
-domibusConnectorClientApi/nbproject/
-domibusConnectorClientWsLink/src/main/resources/eu/domibus/connector/domain/transition/
-domibusConnectorClientWsLink/src/main/resources/eu/domibus/connector/ws/backend/delivery/webservice/
-domibusConnectorClientWsLink/src/main/resources/eu/domibus/connector/ws/backend/webservice/
-domibusConnectorClientWsLink/src/main/java/eu/domibus/connector/domain/transition/
-domibusConnectorClientWsLink/src/main/java/eu/domibus/connector/ws/backend/delivery/webservice/
-domibusConnectorClientWsLink/src/main/java/eu/domibus/connector/ws/backend/webservice/
+client-libs-api/src/main/java/eu/domibus/connector/domain/transition/
+client-libs-api/src/main/resources/eu.ecodex.connector.domain.transition/
+client-libs-api/src/main/java/META-INF/sun-jaxb.episode
+client-libs-api/nbproject/
+client-libs-ws-link/src/main/resources/eu/domibus/connector/domain/transition/
+client-libs-ws-link/src/main/resources/eu/domibus/connector/ws/backend/delivery/webservice/
+client-libs-ws-link/src/main/resources/eu/domibus/connector/ws/backend/webservice/
+client-libs-ws-link/src/main/java/eu/domibus/connector/domain/transition/
+client-libs-ws-link/src/main/java/eu/domibus/connector/ws/backend/delivery/webservice/
+client-libs-ws-link/src/main/java/eu/domibus/connector/ws/backend/webservice/
 .classpath
 .project
-domibusConnectorClient/domibusConnectorClientScheduler/*.classpath
-domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientStarter/messages
-domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientStarter/database
-domibusConnectorClient/domibusConnectorClientLibraries/domibusConnectorClientScheduler/.project
-domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientUI/*.log
+connector-client/client-libs-scheduler/*.classpath
+connector-client/client-application/app-starter/messages
+connector-client/client-application/app-starter/database
+connector-client/client-librairies/client-libs-scheduler/.project
+connector-client/client-application/client-app-ui/*.log
 
 .node_modules/
 **node/
 **node_modules/
-domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientStarter/node_modules/*
-domibusConnectorClient/domibusConnectorClientApplication/domibusConnectorClientWAR/node_modules/*
+connector-client/client-application/app-starter/node_modules/*
+connector-client/client-application/ap-war/node_modules/*
 */package-lock.json
 *.json
 *.js
