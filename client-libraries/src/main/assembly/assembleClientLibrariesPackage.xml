@@ -1,0 +1,99 @@
+<assembly>
+    <id>Libraries</id>
+    <formats>
+        <format>zip</format>
+        <format>dir</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <!-- ==================== Copying libraries ================= -->
+
+        <!-- ==================== domibusConnectorAPI ================= -->
+        <fileSet>
+            <directory>${project.basedir}/client-libs-api/target/lib/</directory>
+            <outputDirectory>client-libraries/client-libs-api</outputDirectory>
+            <includes>
+                <include>client-libs-api*.jar</include>
+            </includes>
+        </fileSet>
+
+        <!-- ==================== domibusConnectorClientLibsAPI ================= -->
+        <fileSet>
+            <directory>${project.basedir}/client-libs-api/target/</directory>
+            <outputDirectory>client-libraries/client-libs-api</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/client-libs-api/</directory>
+            <outputDirectory>client-libraries/client-libs-api</outputDirectory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- ==================== domibusConnectorClientLibrary ================= -->
+
+        <fileSet>
+            <directory>${project.basedir}/client-libs-library/target/</directory>
+            <outputDirectory>client-libraries/client-libs-library</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/client-libs-library/</directory>
+            <outputDirectory>client-libraries/client-libs-library</outputDirectory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- ==================== domibusConnectorClientScheduler ================= -->
+
+        <fileSet>
+            <directory>${project.basedir}/client-libs-scheduler/target/</directory>
+            <outputDirectory>client-libraries/client-libs-scheduler</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/client-libs-scheduler/</directory>
+            <outputDirectory>client-libraries/client-libs-scheduler</outputDirectory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- ==================== domibusConnectorClientWSLink ================= -->
+
+        <fileSet>
+            <directory>${project.basedir}/client-libs-ws-link/target/</directory>
+            <outputDirectory>client-libraries/client-libs-ws-link</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/client-libs-ws-link/</directory>
+            <outputDirectory>client-libraries/client-libs-ws-link</outputDirectory>
+            <includes>
+                <include>pom.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- ==================== Copying site documentation ================= -->
+        <fileSet>
+            <directory>${project.basedir}/target/site</directory>
+            <outputDirectory>client-documentation/site</outputDirectory>
+        </fileSet>
+
+        <!-- ==================== Copying example properties ================= -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/libraries/properties</directory>
+            <outputDirectory>client-documentation/properties</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

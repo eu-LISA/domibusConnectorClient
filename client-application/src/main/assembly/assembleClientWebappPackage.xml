@@ -1,0 +1,35 @@
+<assembly>
+    <id>Webapp</id>
+    <formats>
+        <format>zip</format>
+        <!-- <format>dir</format> -->
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+
+        <!-- ==================== Copying file structure ================= -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/WAR</directory>
+            <outputDirectory></outputDirectory>
+        </fileSet>
+
+        <!-- ==================== Copying domibusConnectorClientWAR library ================= -->
+        <fileSet>
+            <directory>${project.basedir}/domibusConnectorClientWAR/target/</directory>
+            <outputDirectory>webapps</outputDirectory>
+            <includes>
+                <include>*.war</include>
+            </includes>
+            <excludes>
+                <exclude>*-sources.jar</exclude>
+                <exclude>*-javadoc.jar</exclude>
+            </excludes>
+        </fileSet>
+
+        <!-- ==================== Copying site documentation ================= -->
+        <fileSet>
+            <directory>${project.basedir}/target/site/</directory>
+            <outputDirectory>client-documentation/site</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

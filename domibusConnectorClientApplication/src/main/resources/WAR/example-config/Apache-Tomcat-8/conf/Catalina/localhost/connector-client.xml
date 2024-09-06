@@ -1,9 +1,0 @@
-<Context>
-
-	<Parameter name="connector-client.config.location" value="${catalina.base}/conf/connector-client/" />
-	<Parameter name="connector-client.config.file" value="${catalina.base}/conf/connector-client/connector-client.properties" />
-	<Parameter name="logging.config" value="${catalina.base}/conf/connector-client/log4j2.xml" />
-
-
-</Context>
-
