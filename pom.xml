@@ -130,7 +130,7 @@
         <okio.version>1.17.2</okio.version>
         <spring.boot.version>2.6.6</spring.boot.version>
         <swagger.version>1.5.12</swagger.version>
-        <vaadin.version>14.1.17</vaadin.version>
+        <vaadin.version>24.4.11</vaadin.version>
         <org.apache.log4j2.version>2.17.0</org.apache.log4j2.version>
         <org.apache.log4j2.version>2.17.0</org.apache.log4j2.version>
     </properties>
