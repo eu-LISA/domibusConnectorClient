@@ -127,7 +127,7 @@
         <javax.validation-api.version>2.0.1.Final</javax.validation-api.version>
         <lombok.version>1.18.34</lombok.version>
         <objenesis.version>2.6</objenesis.version>
-        <okio.version>1.17.2</okio.version>
+        <okio.version>3.9.1</okio.version>
         <spring.boot.version>2.6.6</spring.boot.version>
         <swagger.version>1.5.12</swagger.version>
         <vaadin.version>14.1.17</vaadin.version>
