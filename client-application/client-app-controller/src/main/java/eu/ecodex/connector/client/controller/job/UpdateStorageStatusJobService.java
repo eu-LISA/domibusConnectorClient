@@ -14,10 +14,10 @@ import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnector
 import eu.ecodex.connector.client.controller.persistence.service.IDomibusConnectorClientPersistenceService;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageStatus;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;

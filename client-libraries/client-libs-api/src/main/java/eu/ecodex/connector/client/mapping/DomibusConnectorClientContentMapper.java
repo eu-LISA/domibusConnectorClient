@@ -10,8 +10,8 @@
 
 package eu.ecodex.connector.client.mapping;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageContentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageContentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 
 /**
  * Interface with methods to map the businessContent of a {@link DomibusConnectorMessageType}

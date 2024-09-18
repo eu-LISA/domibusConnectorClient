@@ -10,8 +10,8 @@
 
 package eu.ecodex.connector.client.filesystem;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.io.File;
 
 /**

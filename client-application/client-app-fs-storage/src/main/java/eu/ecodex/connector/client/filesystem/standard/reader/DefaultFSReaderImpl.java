@@ -10,19 +10,6 @@
 
 package eu.ecodex.connector.client.filesystem.standard.reader;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorActionType;
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageAttachmentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageContentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDocumentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorPartyType;
-import eu.domibus.connector.domain.transition.DomibusConnectorServiceType;
-import eu.domibus.connector.domain.transition.tools.ConversionTools;
 import eu.ecodex.connector.client.filesystem.AbstractDomibusConnectorClientFileSystemReaderImpl;
 import eu.ecodex.connector.client.filesystem.DomibusConnectorClientFileSystemException;
 import eu.ecodex.connector.client.filesystem.DomibusConnectorClientFileSystemReader;
@@ -30,13 +17,26 @@ import eu.ecodex.connector.client.filesystem.configuration.DomibusConnectorClien
 import eu.ecodex.connector.client.filesystem.standard.DefaultMessageProperties;
 import eu.ecodex.connector.client.filesystem.standard.DomibusConnectorClientFSMessageProperties;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorActionType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageAttachmentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageContentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDocumentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorPartyType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorServiceType;
+import eu.ecodex.connector.domain.transition.tools.ConversionTools;
+import jakarta.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -9,9 +9,14 @@
     </parent>
     <artifactId>client-libs-api</artifactId>
     <dependencies>
+        <!--spring boot-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
         <!--ecodex-->
         <dependency>
-            <groupId>eu.domibus.connector</groupId>
+            <groupId>eu.ecodex.connector</groupId>
             <artifactId>domibusConnectorAPIlib</artifactId>
             <exclusions>
                 <exclusion>
@@ -27,6 +32,11 @@
                     <groupId>org.springframework.cloud</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!--jakarta-->
+        <dependency>
+            <groupId>jakarta.jws</groupId>
+            <artifactId>jakarta.jws-api</artifactId>
         </dependency>
         <!--other-->
         <dependency>
@@ -48,14 +58,6 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.jws</groupId>
-            <artifactId>jakarta.jws-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
         </dependency>
     </dependencies>
     <build>

@@ -10,16 +10,16 @@
 
 package eu.ecodex.connector.client.link.ws.impl;
 
-import eu.domibus.connector.domain.transition.DomibsConnectorAcknowledgementType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageResponseType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessagesType;
-import eu.domibus.connector.ws.backend.webservice.DomibusConnectorBackendWebService;
-import eu.domibus.connector.ws.backend.webservice.EmptyRequestType;
-import eu.domibus.connector.ws.backend.webservice.GetMessageByIdRequest;
-import eu.domibus.connector.ws.backend.webservice.ListPendingMessageIdsResponse;
 import eu.ecodex.connector.client.exception.DomibusConnectorBackendWebServiceClientException;
 import eu.ecodex.connector.client.link.DomibusConnectorClientLink;
+import eu.ecodex.connector.domain.transition.DomibsConnectorAcknowledgementType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageResponseType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessagesType;
+import eu.ecodex.connector.ws.backend.webservice.DomibusConnectorBackendWebService;
+import eu.ecodex.connector.ws.backend.webservice.EmptyRequestType;
+import eu.ecodex.connector.ws.backend.webservice.GetMessageByIdRequest;
+import eu.ecodex.connector.ws.backend.webservice.ListPendingMessageIdsResponse;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

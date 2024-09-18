@@ -10,11 +10,11 @@
 
 package eu.ecodex.connector.client;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessagesType;
 import eu.ecodex.connector.client.exception.DCCConnectorAcknowledgementException;
 import eu.ecodex.connector.client.exception.DomibusConnectorBackendWebServiceClientException;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessagesType;
 import java.util.Map;
 
 /**

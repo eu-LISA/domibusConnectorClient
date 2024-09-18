@@ -10,23 +10,23 @@
 
 package eu.ecodex.connector.client.impl;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorActionType;
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageAttachmentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageContentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDocumentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorPartyType;
-import eu.domibus.connector.domain.transition.DomibusConnectorServiceType;
 import eu.ecodex.connector.client.DomibusConnectorClientMessageBuilder;
+import eu.ecodex.connector.domain.transition.DomibusConnectorActionType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageAttachmentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageContentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDocumentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorPartyType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorServiceType;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.mail.util.ByteArrayDataSource;
 import java.io.ByteArrayInputStream;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.mail.util.ByteArrayDataSource;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import org.springframework.stereotype.Component;
@@ -238,7 +238,7 @@ public class DomibusConnectorClientMessageBuilderImpl
     }
 
     private DataHandler createDataHandler(byte[] content, String type) {
-        DataSource ds = new ByteArrayDataSource(content, type);
+        DataSource ds =  new ByteArrayDataSource(content, type);
 
         return new DataHandler(ds);
     }

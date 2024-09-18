@@ -20,7 +20,7 @@
     </modules>
     <dependencies>
         <dependency>
-            <groupId>eu.domibus.connector</groupId>
+            <groupId>eu.ecodex.connector</groupId>
             <artifactId>domibusConnectorAPI</artifactId>
             <exclusions>
                 <exclusion>
@@ -33,6 +33,20 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>client-libs-api</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <!--jakarta-->
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>

@@ -10,9 +10,6 @@
 
 package eu.ecodex.connector.client.controller.rest.util;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.DomibusConnectorClientMessageBuilder;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientConfirmation;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessage;
@@ -26,6 +23,9 @@ import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageStatus;
 import eu.ecodex.connector.client.storage.exception.DomibusConnectorClientStorageException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.util.Map;
 import java.util.Set;
 import org.slf4j.Logger;

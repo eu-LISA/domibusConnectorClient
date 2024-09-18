@@ -10,7 +10,7 @@
 
 package eu.ecodex.connector.client.filesystem;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;

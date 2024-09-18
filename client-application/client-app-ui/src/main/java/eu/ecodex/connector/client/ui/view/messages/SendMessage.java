@@ -16,7 +16,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -255,7 +255,7 @@ public class SendMessage extends VerticalLayout
         deleteFileButton.setEnabled(saveEnabled);
         deleteFileButton.addClickListener(e -> {
             var headerContent = new Div();
-            var headerLabel = new Label("Delete file from message");
+            var headerLabel = new NativeLabel("Delete file from message");
             headerLabel.getStyle().set("font-weight", "bold");
             headerLabel.getStyle().set("font-style", "italic");
             headerContent.getStyle().set("text-align", "center");
@@ -427,7 +427,7 @@ public class SendMessage extends VerticalLayout
         downloadAnchor.setTarget("_blank");
         downloadAnchor.setTitle(fileName);
 
-        var button = new Label(fileName);
+        var button = new NativeLabel(fileName);
         downloadAnchor.add(button);
 
         return downloadAnchor;

@@ -10,11 +10,6 @@
 
 package eu.ecodex.connector.client.controller.backend.impl;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessagesType;
-import eu.domibus.connector.domain.transition.tools.ConversionTools;
 import eu.ecodex.connector.client.DomibusConnectorClient;
 import eu.ecodex.connector.client.DomibusConnectorClientAppBackend;
 import eu.ecodex.connector.client.DomibusConnectorClientMessageBuilder;
@@ -34,10 +29,15 @@ import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageStatus;
 import eu.ecodex.connector.client.storage.exception.DomibusConnectorClientStorageException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessagesType;
+import eu.ecodex.connector.domain.transition.tools.ConversionTools;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
@@ -365,7 +365,7 @@ public class DomibusConnectorClientBackendImpl implements DomibusConnectorClient
 
             var conf = new DomibusConnectorClientConfirmation();
             byte[] confirmationBytes =
-                ConversionTools.convertXmlSourceToByteArray(confirmation.getConfirmation());
+                ConversionTools.convertXMLSourceToByteArray(confirmation.getConfirmation());
 
             conf.setConfirmation(confirmationBytes);
             conf.setConfirmationType(confirmation.getConfirmationType().name());

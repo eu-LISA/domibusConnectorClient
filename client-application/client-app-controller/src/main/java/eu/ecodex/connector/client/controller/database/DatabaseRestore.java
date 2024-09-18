@@ -10,15 +10,15 @@
 
 package eu.ecodex.connector.client.controller.database;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientConfirmation;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessage;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessageStatus;
 import eu.ecodex.connector.client.controller.persistence.service.DomibusConnectorClientPersistenceService;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageStatus;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

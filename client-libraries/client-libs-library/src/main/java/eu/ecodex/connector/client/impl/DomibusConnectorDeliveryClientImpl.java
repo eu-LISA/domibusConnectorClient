@@ -10,13 +10,13 @@
 
 package eu.ecodex.connector.client.impl;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.DomibusConnectorClientBackend;
 import eu.ecodex.connector.client.DomibusConnectorClientMessageHandler;
 import eu.ecodex.connector.client.DomibusConnectorDeliveryClient;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientBackendException;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientException;
 import eu.ecodex.connector.client.link.ws.configuration.ConnectorLinkWSProperties;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

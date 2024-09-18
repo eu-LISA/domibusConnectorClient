@@ -10,7 +10,6 @@
 
 package eu.ecodex.connector.client.ui.form;
 
-import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -20,7 +19,6 @@ import eu.ecodex.connector.client.rest.model.DomibusConnectorClientMessage;
  * The DomibusConnectorClientMessageForm class represents a form for displaying and editing
  * information about a DomibusConnectorClientMessage.
  */
-@HtmlImport("styles/shared-styles.html")
 public class DomibusConnectorClientMessageForm extends FormLayout {
     private static final long serialVersionUID = 1L;
     private final TextField backendMessageId = FormsUtil.getFormattedTextFieldReadOnly();

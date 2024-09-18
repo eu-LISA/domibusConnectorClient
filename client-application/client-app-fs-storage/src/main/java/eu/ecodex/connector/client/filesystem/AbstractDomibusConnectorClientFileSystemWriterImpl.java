@@ -10,14 +10,14 @@
 
 package eu.ecodex.connector.client.filesystem;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageAttachmentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageContentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.tools.ConversionTools;
 import eu.ecodex.connector.client.filesystem.configuration.DomibusConnectorClientFSConfigurationProperties;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageAttachmentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageContentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.tools.ConversionTools;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -62,7 +62,7 @@ public abstract class AbstractDomibusConnectorClientFileSystemWriterImpl {
         var evidenceXml = new File(path);
         try {
             var xmlBytes =
-                ConversionTools.convertXmlSourceToByteArray(confirmation.getConfirmation());
+                ConversionTools.convertXMLSourceToByteArray(confirmation.getConfirmation());
             byteArrayToFile(xmlBytes, evidenceXml);
         } catch (IOException e) {
             throw new DomibusConnectorClientFileSystemException(
@@ -172,7 +172,7 @@ public abstract class AbstractDomibusConnectorClientFileSystemWriterImpl {
         String fileName) {
         try {
             byte[] content =
-                ConversionTools.convertXmlSourceToByteArray(messageContent.getXmlContent());
+                ConversionTools.convertXMLSourceToByteArray(messageContent.getXmlContent());
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug(
                     "Business content XML before written to file: {}", new String(content));
@@ -253,7 +253,7 @@ public abstract class AbstractDomibusConnectorClientFileSystemWriterImpl {
                 confirmation.getConfirmationType().name() + properties.getXmlFileExtension();
             try {
                 var confirmationBytes =
-                    ConversionTools.convertXmlSourceToByteArray(confirmation.getConfirmation());
+                    ConversionTools.convertXMLSourceToByteArray(confirmation.getConfirmation());
                 createFile(messageFolder, fileName, confirmationBytes);
             } catch (IOException e) {
                 LOGGER.error(

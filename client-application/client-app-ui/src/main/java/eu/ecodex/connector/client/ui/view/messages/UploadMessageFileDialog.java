@@ -13,7 +13,7 @@ package eu.ecodex.connector.client.ui.view.messages;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import eu.ecodex.connector.client.rest.model.DomibusConnectorClientMessageFileType;
@@ -40,7 +40,7 @@ public class UploadMessageFileDialog extends Dialog {
      */
     public UploadMessageFileDialog() {
         var headerContent = new Div();
-        var header = new Label("Upload file to message");
+        var header = new NativeLabel("Upload file to message");
         header.getStyle().set("font-weight", "bold");
         header.getStyle().set("font-style", "italic");
         headerContent.getStyle().set("text-align", "center");

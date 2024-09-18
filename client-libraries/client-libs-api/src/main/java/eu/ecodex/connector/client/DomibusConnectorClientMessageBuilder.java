@@ -10,18 +10,18 @@
 
 package eu.ecodex.connector.client;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageAttachmentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageContentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDocumentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorPartyType;
-import eu.domibus.connector.domain.transition.DomibusConnectorServiceType;
-import javax.activation.DataHandler;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureMimeType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageAttachmentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageContentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDocumentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorPartyType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorServiceType;
+import jakarta.activation.DataHandler;
 import javax.xml.transform.Source;
 
 /**

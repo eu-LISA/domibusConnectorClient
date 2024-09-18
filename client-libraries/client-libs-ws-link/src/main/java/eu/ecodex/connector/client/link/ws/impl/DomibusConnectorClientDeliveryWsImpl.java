@@ -10,10 +10,10 @@
 
 package eu.ecodex.connector.client.link.ws.impl;
 
-import eu.domibus.connector.domain.transition.DomibsConnectorAcknowledgementType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.ws.backend.delivery.webservice.DomibusConnectorBackendDeliveryWebService;
 import eu.ecodex.connector.client.DomibusConnectorDeliveryClient;
+import eu.ecodex.connector.domain.transition.DomibsConnectorAcknowledgementType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.ws.backend.delivery.webservice.DomibusConnectorBackendDeliveryWebService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,7 +14,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -134,7 +134,7 @@ public class Messages extends VerticalLayout implements RouterLayout, BeforeEnte
         var tabLayout = new HorizontalLayout(tabIcon, tabText);
         tabLayout.setAlignItems(Alignment.CENTER);
 
-        var routerLink = new RouterLink(null, component);
+        var routerLink = new RouterLink((String) null, component);
         routerLink.add(tabLayout);
 
         return routerLink;
@@ -150,7 +150,7 @@ public class Messages extends VerticalLayout implements RouterLayout, BeforeEnte
      */
     public Dialog getDeleteMessageDialog() {
         var headerContent = new Div();
-        var header = new Label("Delete message");
+        var header = new NativeLabel("Delete message");
         header.getStyle().set("font-weight", "bold");
         header.getStyle().set("font-style", "italic");
         headerContent.getStyle().set("text-align", "center");
@@ -181,7 +181,7 @@ public class Messages extends VerticalLayout implements RouterLayout, BeforeEnte
      */
     public Dialog getErrorDialog(String header, String message) {
         var headerContent = new Div();
-        var headerLabel = new Label(header);
+        var headerLabel = new NativeLabel(header);
         headerLabel.getStyle().set("font-weight", "bold");
         headerLabel.getStyle().set("font-style", "italic");
         headerContent.getStyle().set("text-align", "center");

@@ -110,9 +110,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <ignoreMavenProxies>false</ignoreMavenProxies>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

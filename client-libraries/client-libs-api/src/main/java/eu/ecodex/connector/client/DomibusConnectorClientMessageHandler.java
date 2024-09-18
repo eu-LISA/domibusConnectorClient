@@ -10,12 +10,12 @@
 
 package eu.ecodex.connector.client;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.exception.DCCContentMappingException;
 import eu.ecodex.connector.client.exception.DCCMessageValidationException;
 import eu.ecodex.connector.client.mapping.DomibusConnectorClientContentMapper;
 import eu.ecodex.connector.client.schema.validation.DCCInternationalSchemaValidator;
 import eu.ecodex.connector.client.schema.validation.DCCLocalSchemaValidator;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 
 /**
  * Interface to prepare a messages' business content XML before submitting/delivering it.

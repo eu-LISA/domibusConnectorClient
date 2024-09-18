@@ -10,7 +10,6 @@
 
 package eu.ecodex.connector.client.controller.rest.impl;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.DomibusConnectorClientAppBackend;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessage;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessageStatus;
@@ -29,6 +28,7 @@ import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageStatus;
 import eu.ecodex.connector.client.storage.exception.DomibusConnectorClientStorageException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;

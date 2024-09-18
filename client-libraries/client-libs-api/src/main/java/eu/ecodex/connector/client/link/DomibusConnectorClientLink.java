@@ -10,11 +10,11 @@
 
 package eu.ecodex.connector.client.link;
 
-import eu.domibus.connector.domain.transition.DomibsConnectorAcknowledgementType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageResponseType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessagesType;
 import eu.ecodex.connector.client.exception.DomibusConnectorBackendWebServiceClientException;
+import eu.ecodex.connector.domain.transition.DomibsConnectorAcknowledgementType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageResponseType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessagesType;
 import java.util.List;
 
 /**

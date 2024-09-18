@@ -16,7 +16,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -150,7 +150,7 @@ public class MessageDetails extends VerticalLayout
 
     private void openReplyToMessageDialog() {
         var headerContent = new Div();
-        var header = new Label("Send reply to a message");
+        var header = new NativeLabel("Send reply to a message");
         header.getStyle().set("font-weight", "bold");
         header.getStyle().set("font-style", "italic");
         headerContent.getStyle().set("text-align", "center");
@@ -173,7 +173,7 @@ public class MessageDetails extends VerticalLayout
 
     private void openResendMessageDialog() {
         var headerContent = new Div();
-        var header = new Label("Resend message");
+        var header = new NativeLabel("Resend message");
         header.getStyle().set("font-weight", "bold");
         header.getStyle().set("font-style", "italic");
         headerContent.getStyle().set("text-align", "center");
@@ -317,7 +317,7 @@ public class MessageDetails extends VerticalLayout
         downloadAnchor.setTarget("_blank");
         downloadAnchor.setTitle(fileName);
 
-        var button = new Label(fileName);
+        var button = new NativeLabel(fileName);
         downloadAnchor.add(button);
 
         return downloadAnchor;
