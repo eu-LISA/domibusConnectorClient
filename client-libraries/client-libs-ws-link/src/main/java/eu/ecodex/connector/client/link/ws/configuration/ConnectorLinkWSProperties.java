@@ -11,9 +11,10 @@
 package eu.ecodex.connector.client.link.ws.configuration;
 
 import eu.domibus.connector.lib.spring.configuration.CxfTrustKeyStoreConfigurationProperties;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.util.Properties;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -25,10 +26,11 @@ import org.springframework.validation.annotation.Validated;
 /**
  * Configuration properties for the ConnectorLinkWSProperties class.
  */
+@Data
+@Valid
+@Validated
 @SuppressWarnings("squid:S1135")
 @ConfigurationProperties(prefix = ConnectorLinkWSProperties.PREFIX)
-@Validated
-@Valid
 public class ConnectorLinkWSProperties {
     private static final Logger LOGGER = LogManager.getLogger(ConnectorLinkWSProperties.class);
     public static final String PREFIX = "connector-client.connector-link.ws";
@@ -53,13 +55,13 @@ public class ConnectorLinkWSProperties {
     @NotNull
     private String connectorAddress;
     /**
-     * Adress of the push webservice. Relativ path of the webservice the client offers for the
+     * Address of the push webservice. Relative path of the webservice the client offers for the
      * domibusConnector in case the push mode is enabled.
      */
     @NotNull
     private String publishAddress = "/domibusConnectorDeliveryWebservice";
     /**
-     * Definition xml of the webservice-security. By default the library offers the file
+     * Definition xml of the webservice-security. By default, the library offers the file
      * "wsdl/backend.policy.xml" on the classpath that matches the settings used by the
      * domibusConnector.
      */
@@ -68,52 +70,8 @@ public class ConnectorLinkWSProperties {
     @NotNull
     private CxfTrustKeyStoreConfigurationProperties cxf;
 
-    public boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public boolean getPushEnabled() {
         return pushEnabled;
-    }
-
-    public void setPushEnabled(boolean pushEnabled) {
-        this.pushEnabled = pushEnabled;
-    }
-
-    public String getConnectorAddress() {
-        return connectorAddress;
-    }
-
-    public void setConnectorAddress(String connectorAddress) {
-        this.connectorAddress = connectorAddress;
-    }
-
-    public String getPublishAddress() {
-        return publishAddress;
-    }
-
-    public void setPublishAddress(String publishAddress) {
-        this.publishAddress = publishAddress;
-    }
-
-    public Resource getWsPolicy() {
-        return wsPolicy;
-    }
-
-    public void setWsPolicy(Resource wsPolicy) {
-        this.wsPolicy = wsPolicy;
-    }
-
-    public CxfTrustKeyStoreConfigurationProperties getCxf() {
-        return cxf;
-    }
-
-    public void setCxf(CxfTrustKeyStoreConfigurationProperties cxf) {
-        this.cxf = cxf;
     }
 
     /**

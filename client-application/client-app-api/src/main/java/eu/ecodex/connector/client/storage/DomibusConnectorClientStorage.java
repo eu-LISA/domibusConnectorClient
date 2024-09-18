@@ -10,8 +10,8 @@
 
 package eu.ecodex.connector.client.storage;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.storage.exception.DomibusConnectorClientStorageException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.util.Map;
 
 /**

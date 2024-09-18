@@ -10,11 +10,11 @@
 
 package eu.ecodex.connector.client.filesystem;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.filesystem.configuration.DomibusConnectorClientFSConfigurationProperties;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageStatus;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

@@ -15,7 +15,7 @@ import eu.ecodex.connector.client.controller.persistence.dao.PackageDomibusConne
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientPersistenceModel;
 import eu.ecodex.connector.client.controller.persistence.service.DomibusConnectorClientPersistenceService;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;

@@ -10,7 +10,7 @@
 
 package eu.ecodex.connector.client.schema.validation;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 
 /**
  * Interface that may be implemented to validate a messages' business content against a schema. Is

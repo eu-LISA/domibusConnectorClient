@@ -10,11 +10,11 @@
 
 package eu.ecodex.connector.client;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageContentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageContentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 
 /**
  * This interface must be implemented if the client is set up in push/push mode. All messages

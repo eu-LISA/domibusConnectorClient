@@ -10,15 +10,15 @@
 
 package eu.ecodex.connector.client.controller.persistence.service;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorPartyType;
 import eu.ecodex.connector.client.controller.persistence.dao.PDomibusConnectorClientConfirmationDao;
 import eu.ecodex.connector.client.controller.persistence.dao.PDomibusConnectorClientMessageDao;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientConfirmation;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessage;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessageStatus;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorPartyType;
 import java.util.Date;
 import java.util.Optional;
 import lombok.NoArgsConstructor;

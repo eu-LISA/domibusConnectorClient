@@ -10,12 +10,12 @@
 
 package eu.ecodex.connector.client.controller.persistence.service;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.controller.persistence.dao.PDomibusConnectorClientMessageDao;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientConfirmation;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessage;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessageStatus;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 
 /**
  * The IDomibusConnectorClientPersistenceService interface provides methods for persisting and

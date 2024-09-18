@@ -10,10 +10,6 @@
 
 package eu.ecodex.connector.client.filesystem.standard.writer;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorDetachedSignatureType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageContentType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.filesystem.AbstractDomibusConnectorClientFileSystemWriterImpl;
 import eu.ecodex.connector.client.filesystem.DomibusConnectorClientFileSystemException;
 import eu.ecodex.connector.client.filesystem.DomibusConnectorClientFileSystemUtil;
@@ -22,6 +18,10 @@ import eu.ecodex.connector.client.filesystem.configuration.DomibusConnectorClien
 import eu.ecodex.connector.client.filesystem.standard.DefaultMessageProperties;
 import eu.ecodex.connector.client.filesystem.standard.DomibusConnectorClientFSMessageProperties;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorDetachedSignatureType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageContentType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;

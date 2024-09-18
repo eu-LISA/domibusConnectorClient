@@ -10,7 +10,7 @@
 
 package eu.ecodex.connector.client.ui.view;
 
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 public class DashboardView extends VerticalLayout {
     private static final long serialVersionUID = 1L;
     public static final String ROUTE = "";
-    Label label = new Label();
+    NativeLabel label = new NativeLabel();
 
     public DashboardView() {
         label.setText("Welcome to domibusConnectorClient Administration UI");

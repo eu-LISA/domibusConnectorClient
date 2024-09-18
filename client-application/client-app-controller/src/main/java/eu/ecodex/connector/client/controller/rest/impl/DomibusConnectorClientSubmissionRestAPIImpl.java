@@ -10,9 +10,6 @@
 
 package eu.ecodex.connector.client.controller.rest.impl;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.DomibusConnectorClientAppBackend;
 import eu.ecodex.connector.client.DomibusConnectorClientMessageBuilder;
 import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnectorClientMessage;
@@ -29,7 +26,10 @@ import eu.ecodex.connector.client.rest.model.DomibusConnectorClientMessage;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageStatus;
 import eu.ecodex.connector.client.storage.exception.DomibusConnectorClientStorageException;
-import javax.validation.constraints.NotNull;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

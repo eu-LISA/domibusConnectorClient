@@ -26,6 +26,7 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import eu.ecodex.connector.client.ui.ViewConstant;
 import eu.ecodex.connector.client.ui.view.configuration.Configuration;
 import eu.ecodex.connector.client.ui.view.messages.Messages;
+import java.util.Optional;
 
 /**
  * The DomibusConnectorClientUIMainView class is a component that represents the main view of the
@@ -79,7 +80,7 @@ public class DomibusConnectorClientUIMainView extends AppLayout implements Route
         var tabLayout = new HorizontalLayout(tabIcon, tabText);
         tabLayout.setAlignItems(Alignment.CENTER);
 
-        var routerLink = new RouterLink(null, component);
+        var routerLink = new RouterLink((String) null, component);
         routerLink.add(tabLayout);
 
         return routerLink;

@@ -10,7 +10,6 @@
 
 package eu.ecodex.connector.client.impl;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.DomibusConnectorClientMessageHandler;
 import eu.ecodex.connector.client.exception.DCCContentMappingException;
 import eu.ecodex.connector.client.exception.DCCMessageValidationException;
@@ -22,7 +21,8 @@ import eu.ecodex.connector.client.schema.validation.DCCSchemaValidationException
 import eu.ecodex.connector.client.schema.validation.SeverityLevel;
 import eu.ecodex.connector.client.schema.validation.ValidationResult;
 import eu.ecodex.connector.client.spring.ConnectorClientAutoConfiguration;
-import javax.validation.Valid;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import jakarta.validation.Valid;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

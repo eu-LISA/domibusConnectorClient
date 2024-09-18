@@ -10,15 +10,15 @@
 
 package eu.ecodex.connector.client.scheduler.job;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.DomibusConnectorClient;
 import eu.ecodex.connector.client.DomibusConnectorClientBackend;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientBackendException;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import jakarta.validation.Valid;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Map;
-import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,14 +10,14 @@
 
 package eu.ecodex.connector.client.ui.component;
 
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeLabel;
 import lombok.NoArgsConstructor;
 
 /**
- * An extension of the {@link Label} component that provides a custom styling for Lumo theme.
+ * An extension of the {@link NativeLabel} component that provides a custom styling for Lumo theme.
  */
 @NoArgsConstructor
-public class LumoLabel extends Label {
+public class LumoLabel extends NativeLabel {
     private static final long serialVersionUID = 1L;
 
     {

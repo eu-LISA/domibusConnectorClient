@@ -10,10 +10,10 @@
 
 package eu.ecodex.connector.client;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessagesType;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientBackendException;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessagesType;
 
 /**
  * This interface must be implemented if the domibusConnectorClientScheduler is used and/or the

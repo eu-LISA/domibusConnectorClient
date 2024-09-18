@@ -11,8 +11,8 @@
 package eu.ecodex.connector.client.filesystem.configuration;
 
 import eu.domibus.connector.lib.spring.configuration.validation.CheckFolderWriteable;
+import jakarta.validation.Valid;
 import java.nio.file.Path;
-import javax.validation.Valid;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;

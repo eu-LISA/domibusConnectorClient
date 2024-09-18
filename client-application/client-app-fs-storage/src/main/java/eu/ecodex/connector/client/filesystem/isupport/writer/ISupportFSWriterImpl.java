@@ -10,15 +10,15 @@
 
 package eu.ecodex.connector.client.filesystem.isupport.writer;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.filesystem.AbstractDomibusConnectorClientFileSystemWriterImpl;
 import eu.ecodex.connector.client.filesystem.DomibusConnectorClientFileSystemException;
 import eu.ecodex.connector.client.filesystem.DomibusConnectorClientFileSystemWriter;
 import eu.ecodex.connector.client.filesystem.configuration.DomibusConnectorClientFSConfigurationProperties;
 import eu.ecodex.connector.client.filesystem.isupport.ISupportFSMessageProperties;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorageFileType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import jakarta.validation.Valid;
 import java.io.File;
-import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

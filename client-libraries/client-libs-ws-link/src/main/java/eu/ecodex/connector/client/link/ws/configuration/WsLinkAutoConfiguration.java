@@ -14,20 +14,20 @@ import static eu.ecodex.connector.client.link.ws.configuration.ConnectorLinkWSPr
 
 import eu.domibus.connector.lib.spring.configuration.CxfTrustKeyStoreConfigurationProperties;
 import eu.domibus.connector.lib.spring.configuration.StoreConfigurationProperties;
-import eu.domibus.connector.ws.backend.delivery.webservice.DomibusConnectorBackendDeliveryWSService;
-import eu.domibus.connector.ws.backend.webservice.DomibusConnectorBackendWSService;
-import eu.domibus.connector.ws.backend.webservice.DomibusConnectorBackendWebService;
-import eu.domibus.connector.ws.gateway.delivery.webservice.DomibusConnectorGatewayDeliveryWebService;
 import eu.ecodex.connector.client.link.ws.DefaultWsCallbackHandler;
 import eu.ecodex.connector.client.link.ws.WsPolicyLoader;
 import eu.ecodex.connector.client.link.ws.impl.DomibusConnectorClientDeliveryWsImpl;
 import eu.ecodex.connector.client.link.ws.impl.DomibusConnectorClientWSLinkImpl;
+import eu.ecodex.connector.ws.backend.delivery.webservice.DomibusConnectorBackendDeliveryWSService;
+import eu.ecodex.connector.ws.backend.webservice.DomibusConnectorBackendWSService;
+import eu.ecodex.connector.ws.backend.webservice.DomibusConnectorBackendWebService;
+import eu.ecodex.connector.ws.gateway.delivery.webservice.DomibusConnectorGatewayDeliveryWebService;
+import jakarta.xml.ws.soap.SOAPBinding;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
-import javax.xml.ws.soap.SOAPBinding;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.helpers.IOUtils;

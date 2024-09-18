@@ -10,9 +10,9 @@
 
 package eu.ecodex.connector.client.controller.rest.impl;
 
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
 import eu.ecodex.connector.client.rest.DomibusConnectorClientDeliveryRestClientAPI;
 import eu.ecodex.connector.client.rest.model.DomibusConnectorClientMessage;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;

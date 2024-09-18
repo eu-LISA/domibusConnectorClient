@@ -10,15 +10,6 @@
 
 package eu.ecodex.connector.client.impl;
 
-import eu.domibus.connector.domain.transition.DomibsConnectorAcknowledgementType;
-import eu.domibus.connector.domain.transition.DomibusConnectorActionType;
-import eu.domibus.connector.domain.transition.DomibusConnectorConfirmationType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageDetailsType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageResponseType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessageType;
-import eu.domibus.connector.domain.transition.DomibusConnectorMessagesType;
-import eu.domibus.connector.domain.transition.DomibusConnectorPartyType;
-import eu.domibus.connector.domain.transition.DomibusConnectorServiceType;
 import eu.ecodex.connector.client.DomibusConnectorClient;
 import eu.ecodex.connector.client.DomibusConnectorClientMessageHandler;
 import eu.ecodex.connector.client.exception.DCCConnectorAcknowledgementException;
@@ -28,6 +19,15 @@ import eu.ecodex.connector.client.exception.DCCMessageValidationException;
 import eu.ecodex.connector.client.exception.DomibusConnectorBackendWebServiceClientException;
 import eu.ecodex.connector.client.exception.DomibusConnectorClientException;
 import eu.ecodex.connector.client.link.DomibusConnectorClientLink;
+import eu.ecodex.connector.domain.transition.DomibsConnectorAcknowledgementType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorActionType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorConfirmationType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageDetailsType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageResponseType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessageType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorMessagesType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorPartyType;
+import eu.ecodex.connector.domain.transition.DomibusConnectorServiceType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
