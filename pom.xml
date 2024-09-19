@@ -112,7 +112,7 @@
         <maven.surefire-plugin.version>3.5.0</maven.surefire-plugin.version>
         <maven.war-plugin.version>3.4.0</maven.war-plugin.version>
         <!--others plugins-->
-        <asciidoctor.plugin.version>2.0.0-RC.1</asciidoctor.plugin.version>
+        <asciidoctor.plugin.version>3.0.0</asciidoctor.plugin.version>
         <depgraph.plugin.version>3.1.0</depgraph.plugin.version>
         <docker.plugin.version>0.28.0</docker.plugin.version>
         <jib.plugin.version>3.2.1</jib.plugin.version>
