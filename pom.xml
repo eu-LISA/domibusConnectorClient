@@ -124,7 +124,7 @@
         <!--ecodex-->
         <ecodex.utils.version>6.0.0-SNAPSHOT</ecodex.utils.version>
         <!--apache-->
-        <apache.commons-io.version>2.16.1</apache.commons-io.version>
+        <apache.commons-io.version>2.17.0</apache.commons-io.version>
         <apache.commons-lang.version>2.6</apache.commons-lang.version>
         <apache.cxf.version>4.1.0-SNAPSHOT</apache.cxf.version>
         <apache.log4j2.version>2.17.0</apache.log4j2.version>
