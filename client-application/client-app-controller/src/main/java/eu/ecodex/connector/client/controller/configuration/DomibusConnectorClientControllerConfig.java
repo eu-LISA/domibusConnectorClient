@@ -16,6 +16,7 @@ import eu.ecodex.connector.client.controller.persistence.model.PDomibusConnector
 import eu.ecodex.connector.client.controller.persistence.service.DomibusConnectorClientPersistenceService;
 import eu.ecodex.connector.client.storage.DomibusConnectorClientStorage;
 import jakarta.validation.constraints.NotNull;
+import javax.annotation.PostConstruct;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
@@ -25,7 +26,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -66,7 +66,7 @@ public class DomibusConnectorClientControllerConfig {
      * the necessary beans and dependencies from the configuration class
      * DomibusConnectorClientControllerConfig.
      */
-    @Bean
+    @PostConstruct
     @ConditionalOnProperty(
         prefix = DomibusConnectorClientControllerConfig.PREFIX, value = RESTORE_DATABASE_PROPERTY,
         havingValue = "true"
