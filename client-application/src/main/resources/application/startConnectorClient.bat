@@ -22,6 +22,6 @@ title "DomibusConnectorClient"
 
 
 @echo on
-"%JAVA_HOME%\bin\java" -Dloader.path=%CURRENT_DIR%\lib -cp "%CLASSPATH%" -Dconnector-client.properties="config\connector-client.properties" "org.springframework.boot.loader.PropertiesLauncher" 
+"%JAVA_HOME%\bin\java" -Dloader.path=%CURRENT_DIR%\lib -cp "%CLASSPATH%" -Dconnector-client.properties="config\connector-client.properties" "org.springframework.boot.loader.launch.PropertiesLauncher"
 pause
 :end

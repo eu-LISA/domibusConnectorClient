@@ -15,7 +15,7 @@
 
         <!-- ==================== Copying domibusConnectorClientWAR library ================= -->
         <fileSet>
-            <directory>${project.basedir}/domibusConnectorClientWAR/target/</directory>
+            <directory>${project.basedir}/client-app-war/target/</directory>
             <outputDirectory>webapps</outputDirectory>
             <includes>
                 <include>*.war</include>
