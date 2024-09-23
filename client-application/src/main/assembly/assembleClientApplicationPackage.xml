@@ -52,7 +52,7 @@
 
         <!-- ==================== Copying domibusConnectorClientStarter library================= -->
         <fileSet>
-            <directory>${project.basedir}/domibusConnectorClientStarter/target/</directory>
+            <directory>${project.basedir}/client-app-starter/target/</directory>
             <outputDirectory>bin</outputDirectory>
             <includes>
                 <include>*.jar</include>
